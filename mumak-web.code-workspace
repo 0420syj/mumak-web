@@ -15,6 +15,10 @@
     {
       "name": "🎨 tailwind-config",
       "path": "packages/tailwind-config"
+    },
+    {
+      "name": "🔧 utils",
+      "path": "packages/utils"
     }
   ],
   "settings": {}
