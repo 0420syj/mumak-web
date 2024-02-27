@@ -1,1 +1,1 @@
-export { default } from "@moomin-money/components/home/HomePage";
+export { default } from "@moomin-money/components/home/home-page";
