@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "apps/moomin-money"
+	},
+	{
+		"path": "packages/ui"
+	}
+],
+  "settings": {}
+}
