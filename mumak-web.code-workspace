@@ -19,6 +19,10 @@
     {
       "name": "🔧 utils",
       "path": "packages/utils"
+    },
+    {
+      "name": "📕 shared-ui",
+      "path": "packages/shared-ui"
     }
   ],
   "settings": {}
