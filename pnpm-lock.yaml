@@ -26,6 +26,9 @@ importers:
 
   apps/moomin-money:
     dependencies:
+      '@repo/shared-ui':
+        specifier: workspace:*
+        version: link:../../packages/shared-ui
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
