@@ -1,3 +1,1 @@
-export default function Page(): JSX.Element {
-  return <main>빵빚무 가계부</main>;
-}
+export { default } from "@moomin-money/components/home/HomePage";
