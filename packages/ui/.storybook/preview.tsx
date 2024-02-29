@@ -44,7 +44,6 @@ const preview: Preview = {
               padding: "2rem",
             }}
           >
-            {" "}
             <Story />
           </div>
         </div>
