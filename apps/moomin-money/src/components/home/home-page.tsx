@@ -1,4 +1,4 @@
-import { Button } from "@repo/new-ui";
+import { Button } from "@repo/ui";
 
 const HomePage = () => {
   return (
