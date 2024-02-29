@@ -1,15 +1,18 @@
 import { Button } from "@repo/ui/button";
 import { Input } from "@repo/ui/input";
-import { ModeToggle } from "@moomin-money/components/mode-toggle";
+import { HomeBuyerRadioGroup } from "@moomin-money/components/home/home-buyer-radio-group";
+import { HomeDatePicker } from "@moomin-money/components/home/home-date-picker";
+import { HomePaymentRadioGroup } from "@moomin-money/components/home/home-payment-radio-group";
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <>
+      <HomeDatePicker />
+      <HomeBuyerRadioGroup />
       <Button>Click me</Button>
       <Input type="text" placeholder="Type something" />
-      <ModeToggle />
-    </div>
+      <HomePaymentRadioGroup />
+    </>
   );
 };
 
