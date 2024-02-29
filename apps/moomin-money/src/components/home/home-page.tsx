@@ -1,4 +1,5 @@
-import { Button, Input } from "@repo/ui";
+import { Button } from "@repo/ui/button";
+import { Input } from "@repo/ui/input";
 import { ModeToggle } from "@moomin-money/components/mode-toggle";
 
 const HomePage = () => {
