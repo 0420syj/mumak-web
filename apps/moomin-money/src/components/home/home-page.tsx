@@ -1,4 +1,5 @@
 import { Button, Input } from "@repo/ui";
+import { ModeToggle } from "@moomin-money/components/mode-toggle";
 
 const HomePage = () => {
   return (
@@ -6,6 +7,7 @@ const HomePage = () => {
       <h1>Home</h1>
       <Button>Click me</Button>
       <Input type="text" placeholder="Type something" />
+      <ModeToggle />
     </div>
   );
 };
