@@ -1,19 +1,14 @@
-import { Button } from "@repo/shared-ui";
+import { Button } from "@repo/ui/button";
+import { Input } from "@repo/ui/input";
+import { ModeToggle } from "@moomin-money/components/mode-toggle";
 
 const HomePage = () => {
   return (
     <div>
       <h1>Home</h1>
-      <div className="flex flex-row space-x-4">
-        <Button label="Click me" size="large" primary />
-        <Button label="Click me" size="medium" primary />
-        <Button label="Click me" size="small" primary />
-      </div>
-      <div className="flex flex-row space-x-4">
-        <Button label="Click me" size="large" />
-        <Button label="Click me" size="medium" />
-        <Button label="Click me" size="small" />
-      </div>
+      <Button>Click me</Button>
+      <Input type="text" placeholder="Type something" />
+      <ModeToggle />
     </div>
   );
 };
