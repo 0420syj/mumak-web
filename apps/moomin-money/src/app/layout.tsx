@@ -1,5 +1,5 @@
 import "./globals.css";
-import "@repo/ui/styles.css";
+import "@repo/new-ui/styles.css";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 

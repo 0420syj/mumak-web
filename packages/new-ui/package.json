@@ -1,8 +1,14 @@
 {
-  "name": "new-ui",
+  "name": "@repo/new-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css",
+    "./tailwind-config": "./tailwind.config.ts"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
