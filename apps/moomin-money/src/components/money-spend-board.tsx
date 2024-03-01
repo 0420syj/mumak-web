@@ -1,4 +1,4 @@
-const fetchMoneySpent = async (range: string) => {
+const fetchMoneySpend = async (range: string) => {
   const mainSheetName = process.env
     .NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME as string;
 
@@ -12,12 +12,12 @@ const fetchMoneySpent = async (range: string) => {
   return data.values[0][0];
 };
 
-export default async function MoneySpentBoard() {
-  const [wannyMoneySpent, moominMoneySpent, totalMoneySpent] =
+export default async function MoneySpendBoard() {
+  const [wannyMoneySpend, moominMoneySpend, totalMoneySpend] =
     await Promise.all([
-      fetchMoneySpent("C24"),
-      fetchMoneySpent("C25"),
-      fetchMoneySpent("C26"),
+      fetchMoneySpend("C24"),
+      fetchMoneySpend("C25"),
+      fetchMoneySpend("C26"),
     ]);
 
   return (
@@ -25,15 +25,15 @@ export default async function MoneySpentBoard() {
       <div className="flex flex-row justify-around">
         <div className="flex flex-col items-center">
           <p>🐶 빵떡</p>
-          <small>₩{wannyMoneySpent.toLocaleString()}</small>
+          <small>₩{wannyMoneySpend.toLocaleString()}</small>
         </div>
         <div className="flex flex-col items-center">
           <p>💵 합계</p>
-          <small>₩{totalMoneySpent.toLocaleString()}</small>
+          <small>₩{totalMoneySpend.toLocaleString()}</small>
         </div>
         <div className="flex flex-col items-center">
           <p>🐻‍❄️ 무민</p>
-          <small>₩{moominMoneySpent.toLocaleString()}</small>
+          <small>₩{moominMoneySpend.toLocaleString()}</small>
         </div>
       </div>
     </div>
