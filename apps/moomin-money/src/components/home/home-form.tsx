@@ -26,25 +26,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { HomeBuyerRadioGroup } from "@moomin-money/components/home/home-buyer-radio-group";
-import { HomeDatePicker } from "@moomin-money/components/home/home-date-picker";
 import { HomePaymentRadioGroup } from "@moomin-money/components/home/home-payment-radio-group";
 
 const formSchema = z.object({
-  spendDate: z.date({
+  date: z.date({
     required_error: "Spend date is required.",
   }),
   content: z.string().min(2, {
     message: "content must be at least 2 characters.",
   }),
+  price: z.number({
+    required_error: "Age is required",
+    invalid_type_error: "Age must be a number",
+  }),
+  category: z.string(),
+  payment: z.string(),
+  note: z.string(),
 });
 
 export function HomeForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      spendDate: new Date(),
+      date: new Date(),
       content: "",
+      price: 0,
+      category: "",
+      payment: "",
+      note: "",
     },
   });
 
@@ -58,7 +67,7 @@ export function HomeForm() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="spendDate"
+            name="date"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>날짜</FormLabel>
@@ -102,9 +111,9 @@ export function HomeForm() {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>내용</FormLabel>
                 <FormControl>
-                  <Input placeholder="햄버거 2개" {...field} />
+                  <Input placeholder="구매한 상품명" {...field} />
                 </FormControl>
                 <FormDescription>
                   This is your public display name.
@@ -113,15 +122,74 @@ export function HomeForm() {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="price"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>가격</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription>
+                  price
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>카테고리</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription>
+                  price
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="payment"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>결제수단</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription>
+                  price
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="note"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>비고</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription>
+                  price
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-
-      <HomeDatePicker />
-      <HomeBuyerRadioGroup />
-      <Button>Click me</Button>
-      <Input type="text" placeholder="Type something" />
-      <HomePaymentRadioGroup />
     </>
   );
 }

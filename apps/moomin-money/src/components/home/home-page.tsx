@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
 import { Skeleton } from "@repo/ui/skeleton";
-import { HomeForm } from "./home-form";
+import { HomeForm } from "@moomin-money/components/home/home-form";
 
 const MoneySpendBoard = dynamic(
   () => import("@moomin-money/components/money-spend-board"),
