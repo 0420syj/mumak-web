@@ -30,10 +30,10 @@ const MoneySpendBoard = dynamic(
 
 const HomePage = () => {
   return (
-    <>
+    <div className="container items-center">
       <MoneySpendBoard />
       <HomeForm />
-    </>
+    </div>
   );
 };
 
