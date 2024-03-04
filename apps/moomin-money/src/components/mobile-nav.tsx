@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 
 import { cn } from "@repo/lib/utils";
 import { Button } from "@repo/ui/button";
-import { ScrollArea } from "@repo/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@repo/ui/sheet";
 
 export function MobileNav() {

@@ -15,7 +15,7 @@ export async function GET(
 
     const values = await googleSheetsService.getSheetValues(
       process.env.GOOGLE_SPREADSHEET_ID as string,
-      (slug + "!" + (range ?? process.env.GOOGLE_SHEET_RANGE)) as string
+      `${slug}!${range ?? process.env.GOOGLE_SHEET_RANGE}`,
     );
 
     return NextResponse.json({ values });

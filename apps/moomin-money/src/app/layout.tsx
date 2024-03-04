@@ -1,12 +1,12 @@
 import "./globals.css";
 import "@repo/ui/styles.css";
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_KR } from "next/font/google";
+import { Noto_Sans_KR as NotoSansKR } from "next/font/google";
 
 import { ThemeProvider } from "@moomin-money/components/theme-provider";
 import { SiteHeader } from "@moomin-money/components/header";
 
-const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
+const notoSansKr = NotoSansKR({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "빵빚무 가계부",
