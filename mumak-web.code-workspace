@@ -1,20 +1,24 @@
 {
   "folders": [
     {
-      "name": "mumak-web",
+      "name": "🐱mumak-web",
       "path": "."
     },
     {
-      "name": "🐻‍❄️ moomin-money",
+      "name": "💸moomin-money",
       "path": "apps/moomin-money"
     },
     {
-      "name": "📕 ui",
+      "name": "📕ui",
       "path": "packages/ui"
     },
     {
-      "name": "🎨 tailwind-config",
+      "name": "🎨tailwind-config",
       "path": "packages/tailwind-config"
+    },
+    {
+      "name": "🔧utils",
+      "path": "packages/utils"
     }
   ],
   "settings": {}
