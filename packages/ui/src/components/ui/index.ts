@@ -14,3 +14,6 @@ export * from "./toast";
 export * from "./table";
 export * from "./skeleton";
 export * from "./form";
+
+export * from "./scroll-area";
+export * from "./sheet";
