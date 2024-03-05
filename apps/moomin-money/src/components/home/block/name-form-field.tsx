@@ -38,7 +38,7 @@ export const NameFormField = ({
                 htmlFor="wanny"
                 className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
               >
-                wanny
+                🐶 빵떡
               </FormLabel>
             </FormItem>
             <FormItem className="flex items-center space-x-3 space-y-0">
@@ -53,7 +53,7 @@ export const NameFormField = ({
                 htmlFor="moomin"
                 className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
               >
-                moomin
+                🐻‍❄️ 무민
               </FormLabel>
             </FormItem>
           </RadioGroup>

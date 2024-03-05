@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@repo/lib/utils";
 import { Button } from "@repo/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@repo/ui/sheet";
+import { ScrollArea } from "@repo/ui/scroll-area";
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
@@ -58,6 +59,11 @@ export function MobileNav() {
         >
           Moomin Money
         </MobileLink>
+        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
+          <MobileLink href="/moneybook" onOpenChange={setOpen}>
+            Moneybook
+          </MobileLink>
+        </ScrollArea>
       </SheetContent>
     </Sheet>
   );

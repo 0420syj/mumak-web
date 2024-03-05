@@ -20,7 +20,7 @@ export default async function MoneySpendBoard() {
     return Promise.all(spendCodes.map(fetchMoneySpend)).then((spends) =>
       spends.map((spend, index) => ({
         label: labels[index],
-        amount: spend.toLocaleString(),
+        amount: `₩${spend.toLocaleString()}`,
       }))
     );
   };
@@ -28,15 +28,13 @@ export default async function MoneySpendBoard() {
   const [moneySpends] = await Promise.all([fetchAllMoneySpend()]);
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-row justify-around">
-        {moneySpends.map(({ label, amount }) => (
-          <div className="flex flex-col items-center" key={label}>
-            <p>{label}</p>
-            <p>₩{amount}</p>
-          </div>
-        ))}
-      </div>
+    <div className="flex flex-row justify-around">
+      {moneySpends.map(({ label, amount }) => (
+        <div className="flex flex-col items-center gap-1" key={label}>
+          <p className="text-lg font-semibold">{label}</p>
+          <p>{amount}</p>
+        </div>
+      ))}
     </div>
   );
 }

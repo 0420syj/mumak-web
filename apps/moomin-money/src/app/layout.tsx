@@ -4,19 +4,23 @@ import type { Metadata, Viewport } from "next";
 import { Noto_Sans_KR as NotoSansKR } from "next/font/google";
 
 import { ThemeProvider } from "@moomin-money/components/theme-provider";
-import { SiteHeader } from "@moomin-money/components/header";
+import { Header } from "@moomin-money/components/header";
 
 const notoSansKr = NotoSansKR({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "빵빚무 가계부",
+  description: "빵빚무 가계부",
+  applicationName: "빵빚무 가계부",
+  authors: {
+    name: "Wan Sim",
+    url: "https://wannysim.me",
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#024280",
-  initialScale: 1,
   width: "device-width",
-  height: "device-height",
+  initialScale: 1.0,
 };
 
 export default function RootLayout({
@@ -34,8 +38,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative flex min-h-screen flex-col bg-background">
-            <SiteHeader />
-            <main className="flex-1">{children}</main>
+            <Header />
+            <main className="flex-1 my-8">{children}</main>
           </div>
         </ThemeProvider>
       </body>

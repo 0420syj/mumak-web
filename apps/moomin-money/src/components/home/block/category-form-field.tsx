@@ -20,7 +20,7 @@ export const CategoryFormField = ({
     name="category"
     render={({ field }) => (
       <FormItem className="flex flex-col">
-        <FormLabel>카테고리</FormLabel>
+        <FormLabel className="text-base">카테고리</FormLabel>
         <FormControl>
           <Input {...field} />
         </FormControl>

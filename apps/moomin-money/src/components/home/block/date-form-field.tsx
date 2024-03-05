@@ -29,7 +29,7 @@ export const DateFormField = ({
     name="date"
     render={({ field }) => (
       <FormItem className="flex flex-col">
-        <FormLabel>날짜</FormLabel>
+        <FormLabel className="text-base">날짜</FormLabel>
         <FormControl>
           <Popover>
             <PopoverTrigger asChild>

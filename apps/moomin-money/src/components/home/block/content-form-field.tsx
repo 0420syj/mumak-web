@@ -20,7 +20,7 @@ export const ContentFormField = ({
     name="content"
     render={({ field }) => (
       <FormItem className="flex flex-col">
-        <FormLabel>내용</FormLabel>
+        <FormLabel className="text-base">내용</FormLabel>
         <FormControl>
           <Input {...field} />
         </FormControl>

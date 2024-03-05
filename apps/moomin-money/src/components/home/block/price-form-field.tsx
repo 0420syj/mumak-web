@@ -20,7 +20,7 @@ export const PriceFormField = ({
     name="price"
     render={({ field }) => (
       <FormItem className="flex flex-col">
-        <FormLabel>가격</FormLabel>
+        <FormLabel className="text-base">가격</FormLabel>
         <FormControl>
           <Input {...field} />
         </FormControl>

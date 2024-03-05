@@ -20,7 +20,7 @@ export const PaymentFormField = ({
     name="payment"
     render={({ field }) => (
       <FormItem className="flex flex-col">
-        <FormLabel>결제수단</FormLabel>
+        <FormLabel className="text-base">결제수단</FormLabel>
         <FormControl>
           <Input {...field} />
         </FormControl>

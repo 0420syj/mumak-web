@@ -8,20 +8,18 @@ const MoneySpendBoard = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex flex-col w-full mb-4">
-        <div className="flex flex-row justify-around">
-          <div className="flex flex-col items-center">
-            <Skeleton className="w-[60px] h-[24px]" />
-            <Skeleton className="w-[64px] h-[20px]" />
-          </div>
-          <div className="flex flex-col items-center">
-            <Skeleton className="w-[60px] h-[24px]" />
-            <Skeleton className="w-[64px] h-[20px]" />
-          </div>
-          <div className="flex flex-col items-center">
-            <Skeleton className="w-[60px] h-[24px]" />
-            <Skeleton className="w-[64px] h-[20px]" />
-          </div>
+      <div className="flex flex-row justify-around">
+        <div className="flex flex-col items-center gap-1">
+          <Skeleton className="w-[60px] h-[28px]" />
+          <Skeleton className="w-[64px] h-[24px]" />
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <Skeleton className="w-[60px] h-[28px]" />
+          <Skeleton className="w-[64px] h-[24px]" />
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <Skeleton className="w-[60px] h-[28px]" />
+          <Skeleton className="w-[64px] h-[24px]" />
         </div>
       </div>
     ),
@@ -30,7 +28,7 @@ const MoneySpendBoard = dynamic(
 
 const HomePage = () => {
   return (
-    <div className="container items-center">
+    <div className="container items-center space-y-8">
       <MoneySpendBoard />
       <HomeForm />
     </div>
