@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-
 import { Skeleton } from "@repo/ui/skeleton";
 import { HomeForm } from "@moomin-money/components/home/home-form";
 
@@ -26,13 +25,13 @@ const MoneySpendBoard = dynamic(
   }
 );
 
-const HomePage = () => {
+function HomePage(): React.ReactElement {
   return (
     <div className="container items-center space-y-8">
       <MoneySpendBoard />
       <HomeForm />
     </div>
   );
-};
+}
 
 export default HomePage;

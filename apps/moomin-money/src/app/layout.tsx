@@ -2,7 +2,6 @@ import "./globals.css";
 import "@repo/ui/styles.css";
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_KR as NotoSansKR } from "next/font/google";
-
 import { ThemeProvider } from "@moomin-money/components/theme-provider";
 import { Header } from "@moomin-money/components/header";
 
@@ -27,15 +26,15 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}): React.ReactElement {
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className={notoSansKr.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
           disableTransitionOnChange
+          enableSystem
         >
           <div className="relative flex min-h-screen flex-col bg-background">
             <Header />

@@ -2,11 +2,9 @@
 
 import { Form } from "@repo/ui/form";
 import { Button } from "@repo/ui/button";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { NameFormField } from "./block/name-form-field";
 import { DateFormField } from "./block/date-form-field";
 import { ContentFormField } from "./block/content-form-field";
@@ -30,7 +28,7 @@ export const formSchema = z.object({
   note: z.string(),
 });
 
-export function HomeForm() {
+export function HomeForm(): React.ReactElement {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,24 +42,28 @@ export function HomeForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>): void {
+    // eslint-disable-next-line no-console -- Temporarily disable no-console rule to log form values for debugging
     console.log(values);
   }
 
   return (
-    <>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <NameFormField control={form.control} />
-          <DateFormField control={form.control} />
-          <ContentFormField control={form.control} />
-          <PriceFormField control={form.control} />
-          <CategoryFormField control={form.control} />
-          <PaymentFormField control={form.control} />
-          <NoteFormField control={form.control} />
-          <Button type="submit">입력</Button>
-        </form>
-      </Form>
-    </>
+    <Form {...form}>
+      <form
+        className="space-y-8"
+        onSubmit={(e) => {
+          void form.handleSubmit(onSubmit)(e);
+        }}
+      >
+        <NameFormField control={form.control} />
+        <DateFormField control={form.control} />
+        <ContentFormField control={form.control} />
+        <PriceFormField control={form.control} />
+        <CategoryFormField control={form.control} />
+        <PaymentFormField control={form.control} />
+        <NoteFormField control={form.control} />
+        <Button type="submit">입력</Button>
+      </form>
+    </Form>
   );
 }
