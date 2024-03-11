@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@repo/lib/utils";
+import * as React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@repo/lib/utils';
 
 export function MainNav(): React.ReactElement {
   const pathname = usePathname();
@@ -16,8 +16,8 @@ export function MainNav(): React.ReactElement {
       <nav className="flex items-center gap-6 text-sm">
         <Link
           className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname === "/moneybook" ? "text-foreground" : "text-foreground/60"
+            'transition-colors hover:text-foreground/80',
+            pathname === '/moneybook' ? 'text-foreground' : 'text-foreground/60'
           )}
           href="/moneybook"
         >

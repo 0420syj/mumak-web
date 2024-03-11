@@ -1,1 +1,1 @@
-export { default } from "@moomin-money/components/moneybook/moneybook-page";
+export { default } from '@moomin-money/components/moneybook/moneybook-page';

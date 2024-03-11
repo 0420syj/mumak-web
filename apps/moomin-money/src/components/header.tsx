@@ -1,6 +1,6 @@
-import { MainNav } from "@moomin-money/components/main-nav";
-import { MobileNav } from "@moomin-money/components/mobile-nav";
-import { ModeToggle } from "@moomin-money/components/mode-toggle";
+import { MainNav } from '@moomin-money/components/main-nav';
+import { MobileNav } from '@moomin-money/components/mobile-nav';
+import { ModeToggle } from '@moomin-money/components/mode-toggle';
 
 export function Header(): React.ReactElement {
   return (

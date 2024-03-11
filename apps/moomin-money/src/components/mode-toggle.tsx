@@ -1,15 +1,10 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { useTheme } from "next-themes";
-import { Button } from "@repo/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@repo/ui/dropdown-menu";
+import * as React from 'react';
+import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { useTheme } from 'next-themes';
+import { Button } from '@repo/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@repo/ui/dropdown-menu';
 
 export function ModeToggle(): React.ReactElement {
   const { setTheme } = useTheme();
@@ -26,21 +21,21 @@ export function ModeToggle(): React.ReactElement {
       <DropdownMenuContent align="end">
         <DropdownMenuItem
           onClick={() => {
-            setTheme("light");
+            setTheme('light');
           }}
         >
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
-            setTheme("dark");
+            setTheme('dark');
           }}
         >
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
-            setTheme("system");
+            setTheme('system');
           }}
         >
           System

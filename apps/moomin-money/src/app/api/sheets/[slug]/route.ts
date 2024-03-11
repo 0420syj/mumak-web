@@ -1,20 +1,17 @@
-import { NextResponse } from "next/server";
-import { GoogleSheetsService } from "@moomin-money/services/google-sheets-service";
+import { NextResponse } from 'next/server';
+import { GoogleSheetsService } from '@moomin-money/services/google-sheets-service';
 
 const googleSheetsService = new GoogleSheetsService();
 
-export async function GET(
-  request: Request,
-  { params }: { params: { slug: string } }
-): Promise<NextResponse> {
+export async function GET(request: Request, { params }: { params: { slug: string } }): Promise<NextResponse> {
   try {
     const slug = params.slug;
 
     const { searchParams } = new URL(request.url);
-    const range = searchParams.get("range");
+    const range = searchParams.get('range');
 
     if (!process.env.GOOGLE_SPREADSHEET_ID) {
-      throw new Error("GOOGLE_SPREADSHEET_ID is not set");
+      throw new Error('GOOGLE_SPREADSHEET_ID is not set');
     }
     const values = await googleSheetsService.getSheetValues(
       process.env.GOOGLE_SPREADSHEET_ID,

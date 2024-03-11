@@ -1,4 +1,4 @@
-import { google } from "googleapis";
+import { google } from 'googleapis';
 
 export class GoogleSheetsService {
   private auth;
@@ -8,57 +8,48 @@ export class GoogleSheetsService {
     this.auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
       },
       scopes: [
-        "https://www.googleapis.com/auth/drive",
-        "https://www.googleapis.com/auth/drive.file",
-        "https://www.googleapis.com/auth/spreadsheets",
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/drive.file',
+        'https://www.googleapis.com/auth/spreadsheets',
       ],
     });
 
-    this.sheets = google.sheets({ version: "v4", auth: this.auth });
+    this.sheets = google.sheets({ version: 'v4', auth: this.auth });
   }
 
-  async getSheetValues(
-    spreadsheetId: string,
-    range: string
-  ): Promise<string[][]> {
+  async getSheetValues(spreadsheetId: string, range: string): Promise<string[][]> {
     const response = await this.sheets.spreadsheets.values.get({
       spreadsheetId,
       range,
-      majorDimension: "ROWS",
-      valueRenderOption: "UNFORMATTED_VALUE",
+      majorDimension: 'ROWS',
+      valueRenderOption: 'UNFORMATTED_VALUE',
     });
 
     return response.data.values as string[][];
   }
 
-  async postSheetValues(
-    spreadsheetId: string,
-    range: string,
-    values: unknown[][]
-  ): Promise<unknown[][] | undefined> {
+  async postSheetValues(spreadsheetId: string, range: string, values: unknown[][]): Promise<unknown[][] | undefined> {
     const request = {
       spreadsheetId,
       range,
       includeValuesInResponse: true,
-      insertDataOption: "INSERT_ROWS",
-      responseDateTimeRenderOption: "FORMATTED_STRING",
-      responseValueRenderOption: "FORMATTED_VALUE",
-      valueInputOption: "RAW",
+      insertDataOption: 'INSERT_ROWS',
+      responseDateTimeRenderOption: 'FORMATTED_STRING',
+      responseValueRenderOption: 'FORMATTED_VALUE',
+      valueInputOption: 'RAW',
       requestBody: {
-        majorDimension: "ROWS",
-        range: "",
+        majorDimension: 'ROWS',
+        range: '',
         values,
       },
     };
 
     try {
       const response = await this.sheets.spreadsheets.values.append(request);
-      return response.data.updates?.updatedData?.values as
-        | unknown[][]
-        | undefined;
+      return response.data.updates?.updatedData?.values as unknown[][] | undefined;
     } catch (err: unknown) {
       throw new Error(err as string);
     }
@@ -88,12 +79,12 @@ export class GoogleSheetsService {
       spreadsheetId,
       range,
       includeValuesInResponse: true,
-      responseDateTimeRenderOption: "FORMATTED_STRING",
-      responseValueRenderOption: "FORMATTED_VALUE",
-      valueInputOption: "RAW",
+      responseDateTimeRenderOption: 'FORMATTED_STRING',
+      responseValueRenderOption: 'FORMATTED_VALUE',
+      valueInputOption: 'RAW',
       requestBody: {
-        majorDimension: "ROWS",
-        range: "",
+        majorDimension: 'ROWS',
+        range: '',
         values,
       },
     };
@@ -119,7 +110,7 @@ export class GoogleSheetsService {
           deleteDimension: {
             range: {
               sheetId,
-              dimension: "ROWS",
+              dimension: 'ROWS',
               startIndex: rowIndex - 1,
               endIndex: rowIndex,
             },
@@ -129,8 +120,7 @@ export class GoogleSheetsService {
     };
 
     try {
-      const response =
-        await this.sheets.spreadsheets.values.batchUpdate(request);
+      const response = await this.sheets.spreadsheets.values.batchUpdate(request);
       return response.data;
     } catch (err: unknown) {
       throw new Error(err as string);
