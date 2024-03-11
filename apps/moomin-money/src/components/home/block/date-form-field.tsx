@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@repo/ui/form';
 import { format } from 'date-fns';
 import { Popover, PopoverContent, PopoverTrigger } from '@repo/ui/popover';
@@ -11,6 +12,8 @@ import { ko } from 'date-fns/locale';
 import type { formSchema } from '../home-form';
 
 export function DateFormField({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
+  const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+
   return (
     <FormField
       control={control}
@@ -19,7 +22,7 @@ export function DateFormField({ control }: { control: Control<z.infer<typeof for
         <FormItem className="flex flex-col">
           <FormLabel className="text-base">날짜</FormLabel>
           <FormControl>
-            <Popover>
+            <Popover onOpenChange={setIsPopoverOpen} open={isPopoverOpen}>
               <PopoverTrigger asChild>
                 <FormControl>
                   <Button
@@ -34,7 +37,7 @@ export function DateFormField({ control }: { control: Control<z.infer<typeof for
                       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- field.value is not always defined
                       field.value ? format(field.value, 'PPP (EEEEEE)', { locale: ko }) : <span>Pick a date</span>
                     }
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                   </Button>
                 </FormControl>
               </PopoverTrigger>
@@ -44,7 +47,10 @@ export function DateFormField({ control }: { control: Control<z.infer<typeof for
                   initialFocus
                   locale={ko}
                   mode="single"
-                  onSelect={field.onChange}
+                  onSelect={event => {
+                    field.onChange(event);
+                    setIsPopoverOpen(false);
+                  }}
                   selected={field.value}
                 />
               </PopoverContent>
