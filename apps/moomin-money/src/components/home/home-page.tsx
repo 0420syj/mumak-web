@@ -25,7 +25,9 @@ const MoneySpendBoard = dynamic(() => import('@moomin-money/components/money-spe
 function HomePage(): React.ReactElement {
   return (
     <div className="container items-center space-y-8">
-      <MoneySpendBoard />
+      <div>
+        <MoneySpendBoard />
+      </div>
       <HomeForm />
     </div>
   );

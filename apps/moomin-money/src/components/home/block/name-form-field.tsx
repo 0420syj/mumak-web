@@ -13,9 +13,9 @@ export function NameFormField({ control }: { control: Control<z.infer<typeof for
         <FormItem className="flex flex-col">
           <FormControl>
             <RadioGroup className="grid grid-cols-2 gap-4" defaultValue={field.value} onValueChange={field.onChange}>
-              <FormItem className="flex items-center space-x-3 space-y-0">
+              <FormItem className="flex items-center justify-center">
                 <FormControl>
-                  <RadioGroupItem className="peer sr-only" id="wanny" value="wanny" />
+                  <RadioGroupItem className="sr-only peer" id="wanny" value="wanny" />
                 </FormControl>
                 <FormLabel
                   className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
@@ -24,9 +24,9 @@ export function NameFormField({ control }: { control: Control<z.infer<typeof for
                   🐶 빵떡
                 </FormLabel>
               </FormItem>
-              <FormItem className="flex items-center space-x-3 space-y-0">
+              <FormItem className="flex items-center justify-center">
                 <FormControl>
-                  <RadioGroupItem className="peer sr-only" id="moomin" value="moomin" />
+                  <RadioGroupItem className="sr-only peer" id="moomin" value="moomin" />
                 </FormControl>
                 <FormLabel
                   className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
