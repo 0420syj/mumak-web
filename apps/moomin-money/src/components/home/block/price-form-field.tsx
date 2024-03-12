@@ -10,7 +10,7 @@ export function PriceFormField({ control }: { control: Control<z.infer<typeof fo
       control={control}
       name="price"
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem>
           <FormLabel className="text-base">가격</FormLabel>
           <FormControl>
             <Input {...field} />

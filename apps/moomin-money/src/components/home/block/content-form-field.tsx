@@ -10,7 +10,7 @@ export function ContentFormField({ control }: { control: Control<z.infer<typeof 
       control={control}
       name="content"
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem>
           <FormLabel className="text-base">내용</FormLabel>
           <FormControl>
             <Input {...field} />

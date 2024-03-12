@@ -10,7 +10,7 @@ export function CategoryFormField({ control }: { control: Control<z.infer<typeof
       control={control}
       name="category"
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem>
           <FormLabel className="text-base">카테고리</FormLabel>
           <FormControl>
             <Input {...field} />
