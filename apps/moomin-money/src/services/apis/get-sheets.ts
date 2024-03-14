@@ -1,9 +1,6 @@
-import { headers } from 'next/headers';
-
-const host = headers().get('x-forwarded-host');
-const protocol = headers().get('x-forwarded-proto');
-
 interface GetSheetValuesRequestInterface {
+  protocol: string;
+  host: string;
   sheetName: string;
   range: string;
 }
@@ -13,6 +10,8 @@ interface GetSheetValuesResponseInterface {
 }
 
 export async function getSheetValues({
+  protocol,
+  host,
   sheetName,
   range,
 }: GetSheetValuesRequestInterface): Promise<GetSheetValuesResponseInterface['values']> {

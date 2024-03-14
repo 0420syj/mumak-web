@@ -1,14 +1,23 @@
+import { headers } from 'next/headers';
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 
 const fetchMoneySpend = async (range: string): Promise<number> => {
-  const mainSheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
+  const sheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
+  const host = headers().get('x-forwarded-host');
+  if (!host) {
+    throw new Error('x-forwarded-host header is not set');
+  }
+  const protocol = headers().get('x-forwarded-proto');
+  if (!protocol) {
+    throw new Error('x-forwarded-proto header is not set');
+  }
 
-  if (!mainSheetName) {
+  if (!sheetName) {
     throw new Error('NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME is not set');
   }
 
   try {
-    return await getSheetValues({ sheetName: mainSheetName, range }).then(values => values[0][0]);
+    return await getSheetValues({ protocol, host, sheetName, range }).then(values => values[0][0]);
   } catch (error) {
     throw new Error(error as string);
   }
