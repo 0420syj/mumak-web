@@ -2,6 +2,7 @@
 
 import { Form } from '@repo/ui/form';
 import { Button } from '@repo/ui/button';
+import { useToast } from '@repo/ui/toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -38,6 +39,8 @@ interface HomeFormProps {
 }
 
 export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -52,8 +55,10 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>): void {
-    // eslint-disable-next-line no-console -- Temporarily disable no-console rule to log form values for debugging
-    console.log(values);
+    toast({
+      title: '입력 완료',
+      description: <pre className="whitespace-pre-wrap">{JSON.stringify(values, null, 2)}</pre>,
+    });
   }
 
   return (
@@ -73,16 +78,18 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
         <PaymentFormField control={form.control} />
         <PaymentFormFieldV2 control={form.control} />
         <NoteFormField control={form.control} />
-        <Button type="submit">입력</Button>
-        <Button
-          onClick={() => {
-            form.reset();
-          }}
-          type="reset"
-          variant="destructive"
-        >
-          초기화
-        </Button>
+        <div className="space-x-4">
+          <Button type="submit">입력</Button>
+          <Button
+            onClick={() => {
+              form.reset();
+            }}
+            type="reset"
+            variant="destructive"
+          >
+            초기화
+          </Button>
+        </div>
       </form>
     </Form>
   );

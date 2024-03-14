@@ -26,17 +26,10 @@ export function DateFormField({ control }: { control: Control<z.infer<typeof for
               <PopoverTrigger asChild>
                 <FormControl>
                   <Button
-                    className={cn(
-                      'text-left font-normal',
-                      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- field.value is not always defined
-                      !field.value && 'text-muted-foreground'
-                    )}
+                    className={cn('text-left font-normal', !field.value && 'text-muted-foreground')}
                     variant="outline"
                   >
-                    {
-                      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- field.value is not always defined
-                      field.value ? format(field.value, 'PPP (EEEEEE)', { locale: ko }) : <span>Pick a date</span>
-                    }
+                    {field.value ? format(field.value, 'PPP (EEEEEE)', { locale: ko }) : <span>Pick a date</span>}
                     <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                   </Button>
                 </FormControl>
