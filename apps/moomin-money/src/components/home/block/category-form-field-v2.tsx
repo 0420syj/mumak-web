@@ -10,19 +10,22 @@ interface RadioOption {
 }
 
 const radioOptions: RadioOption[] = [
-  { id: 'wanny', label: '🐶 빵떡' },
-  { id: 'moomin', label: '🐻‍❄️ 무민' },
+  { id: 'delivery', label: '🚚 배달' },
+  { id: 'food', label: '🍔 음식' },
+  { id: 'shopping', label: '🛍 쇼핑' },
+  { id: 'transport', label: '🚇 교통' },
+  { id: 'etc', label: '📦 기타' },
 ];
 
-export function NameFormField({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
+export function CategoryFormFieldV2({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
   return (
     <FormField
       control={control}
-      name="name"
+      name="category"
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <RadioGroup className="grid grid-cols-2 gap-4" defaultValue={field.value} onValueChange={field.onChange}>
+            <RadioGroup className="grid grid-cols-4 gap-4" defaultValue={field.value} onValueChange={field.onChange}>
               {radioOptions.map(option => (
                 <FormItem className="flex items-center justify-center" key={option.id}>
                   <FormControl>

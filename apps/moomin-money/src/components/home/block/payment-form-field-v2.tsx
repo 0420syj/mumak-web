@@ -10,19 +10,21 @@ interface RadioOption {
 }
 
 const radioOptions: RadioOption[] = [
-  { id: 'wanny', label: '🐶 빵떡' },
-  { id: 'moomin', label: '🐻‍❄️ 무민' },
+  { id: 'card', label: '💳 카드' },
+  { id: 'cash', label: '💵 현금' },
+  { id: 'zeropay', label: '📱 제로페이' },
+  { id: 'halbu', label: '🪙 할부' },
 ];
 
-export function NameFormField({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
+export function PaymentFormFieldV2({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
   return (
     <FormField
       control={control}
-      name="name"
+      name="payment"
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <RadioGroup className="grid grid-cols-2 gap-4" defaultValue={field.value} onValueChange={field.onChange}>
+            <RadioGroup className="grid grid-cols-4 gap-4" defaultValue={field.value} onValueChange={field.onChange}>
               {radioOptions.map(option => (
                 <FormItem className="flex items-center justify-center" key={option.id}>
                   <FormControl>
