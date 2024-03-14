@@ -43,7 +43,7 @@ jobs:
       - name: Pull Vercel Environment Information
         run: |
           vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
-          cp .vercel/.vercel/.env.development.local apps/moomin-money/.env.development.local
+          cp .vercel/.env.development.local apps/moomin-money/.env.development.local
 
       - name: Build
         run: pnpm build
