@@ -7,8 +7,11 @@ const fetchMoneySpend = async (range: string): Promise<number> => {
     throw new Error('NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME is not set');
   }
 
-  const values = await getSheetValues({ sheetName: mainSheetName, range });
-  return values[0][0];
+  try {
+    return await getSheetValues({ sheetName: mainSheetName, range }).then(values => values[0][0]);
+  } catch (error) {
+    throw new Error(error as string);
+  }
 };
 
 export default async function MoneySpendBoard(): Promise<React.ReactElement> {

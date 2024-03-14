@@ -16,7 +16,11 @@ export async function getSheetValues({
   sheetName,
   range,
 }: GetSheetValuesRequestInterface): Promise<GetSheetValuesResponseInterface['values']> {
-  const response = await fetch(`${protocol}://${host}/api/sheets/${sheetName}/?range=${range}`);
+  const response = await fetch(`${protocol}://${host}/api/sheets/${sheetName}/?range=${range}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   const { values } = (await response.json()) as GetSheetValuesResponseInterface;
   return values;
 }
