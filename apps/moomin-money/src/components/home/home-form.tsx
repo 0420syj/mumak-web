@@ -16,31 +16,38 @@ import { PaymentFormFieldV2 } from './block/payment-form-field-v2';
 import { NoteFormField } from './block/note-form-field';
 
 export const formSchema = z.object({
-  name: z.enum(['wanny', 'moomin']),
-  date: z.date({
-    required_error: '날짜를 입력해주세요',
-  }),
-  content: z.string().min(1, '내용을 입력해주세요'),
+  name: z.enum(['wanny', 'moomin']).optional(),
+  date: z
+    .date({
+      required_error: '날짜를 입력해주세요',
+    })
+    .optional(),
+  content: z.string().min(1, '내용을 입력해주세요').optional(),
   price: z
     .string()
     .min(1, '가격을 입력해주세요')
-    .transform(v => v.replace(/[^0-9]/g, '')),
-  category: z.string().min(1, '카테고리를 입력해주세요'),
-  payment: z.string().min(1, '결제수단을 입력해주세요'),
-  note: z.string(),
+    .transform(v => v.replace(/[^0-9]/g, ''))
+    .optional(),
+  category: z.string().min(1, '카테고리를 입력해주세요').optional(),
+  payment: z.string().min(1, '결제수단을 입력해주세요').optional(),
+  note: z.string().optional(),
 });
 
-export function HomeForm(): React.ReactElement {
+interface HomeFormProps {
+  defaultValues?: z.infer<typeof formSchema>;
+}
+
+export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: 'wanny',
       date: new Date(),
       content: '',
       price: '',
       category: '',
       payment: '',
       note: '',
+      ...defaultValues,
     },
   });
 

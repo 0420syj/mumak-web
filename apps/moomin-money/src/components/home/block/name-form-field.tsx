@@ -26,7 +26,12 @@ export function NameFormField({ control }: { control: Control<z.infer<typeof for
               {radioOptions.map(option => (
                 <FormItem className="flex items-center justify-center" key={option.id}>
                   <FormControl>
-                    <RadioGroupItem className="sr-only peer" id={option.id} value={option.id} />
+                    <RadioGroupItem
+                      checked={field.value === option.id}
+                      className="sr-only peer"
+                      id={option.id}
+                      value={option.id}
+                    />
                   </FormControl>
                   <FormLabel
                     className="flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"

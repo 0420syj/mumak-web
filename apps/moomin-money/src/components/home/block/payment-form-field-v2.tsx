@@ -10,10 +10,10 @@ interface RadioOption {
 }
 
 const radioOptions: RadioOption[] = [
-  { id: 'card', label: '💳 카드' },
+  { id: 'credit-card', label: '💳 신용카드' },
   { id: 'cash', label: '💵 현금' },
-  { id: 'zeropay', label: '📱 제로페이' },
-  { id: 'halbu', label: '🪙 할부' },
+  { id: 'zero-pay', label: '💲 제로페이' },
+  { id: 'installment', label: '➗ 할부' },
 ];
 
 export function PaymentFormFieldV2({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
@@ -28,7 +28,12 @@ export function PaymentFormFieldV2({ control }: { control: Control<z.infer<typeo
               {radioOptions.map(option => (
                 <FormItem className="flex items-center justify-center" key={option.id}>
                   <FormControl>
-                    <RadioGroupItem className="sr-only peer" id={option.id} value={option.id} />
+                    <RadioGroupItem
+                      checked={field.value === option.label}
+                      className="sr-only peer"
+                      id={option.id}
+                      value={option.label}
+                    />
                   </FormControl>
                   <FormLabel
                     className="flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
