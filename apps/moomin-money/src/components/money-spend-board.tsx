@@ -1,3 +1,5 @@
+import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
+
 const fetchMoneySpend = async (range: string): Promise<number> => {
   const mainSheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
 
@@ -5,15 +7,8 @@ const fetchMoneySpend = async (range: string): Promise<number> => {
     throw new Error('NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME is not set');
   }
 
-  const host = process.env.NEXT_PUBLIC_HOST;
-  if (!host) {
-    throw new Error('NEXT_PUBLIC_HOST is not set');
-  }
-
-  const response = await fetch(`${host}/api/sheets/${mainSheetName}?range=${range}`);
-
-  const data = (await response.json()) as { values: number[][] };
-  return data.values[0][0];
+  const values = await getSheetValues({ sheetName: mainSheetName, range });
+  return values[0][0];
 };
 
 export default async function MoneySpendBoard(): Promise<React.ReactElement> {
