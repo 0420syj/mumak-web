@@ -67,6 +67,15 @@ export function HomeForm(): React.ReactElement {
         <PaymentFormFieldV2 control={form.control} />
         <NoteFormField control={form.control} />
         <Button type="submit">입력</Button>
+        <Button
+          onClick={() => {
+            form.reset();
+          }}
+          type="reset"
+          variant="destructive"
+        >
+          초기화
+        </Button>
       </form>
     </Form>
   );
