@@ -7,6 +7,7 @@ import { cn } from '@repo/lib/utils';
 import { Button } from '@repo/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@repo/ui/sheet';
 import { ScrollArea } from '@repo/ui/scroll-area';
+import { HomeIcon } from '@radix-ui/react-icons';
 
 export function MobileNav(): React.ReactElement {
   const [open, setOpen] = React.useState(false);
@@ -28,7 +29,8 @@ export function MobileNav(): React.ReactElement {
       </SheetTrigger>
       <SheetContent className="pr-0" side="left">
         <MobileLink className="flex items-center" href="/" onOpenChange={setOpen}>
-          Moomin Money
+          <HomeIcon className="w-4 h-4 mr-2" />
+          <span className="font-bold">Moomin Money</span>
         </MobileLink>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
           <div className="flex flex-col space-y-3">
