@@ -29,14 +29,14 @@ export default async function UserButton(): Promise<React.ReactElement> {
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-56" forceMount>
+        <DropdownMenuContent align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col space-y-1">
+            <div className="flex flex-col space-y-2 p-2">
               <p className="text-sm font-medium leading-none">{session.user.name}</p>
               <p className="text-xs leading-none text-muted-foreground">{session.user.email}</p>
             </div>
           </DropdownMenuLabel>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="flex justify-center p-0">
             <SignOut />
           </DropdownMenuItem>
         </DropdownMenuContent>
