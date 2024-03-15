@@ -1,6 +1,14 @@
+import { getServerSession } from 'next-auth';
+import Link from 'next/link';
+import { authOptions } from '@moomin-money/libs/auth';
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 
-const fetchMoneySpend = async (range: string): Promise<number> => {
+const checkSession = async (): Promise<boolean> => {
+  const session = await getServerSession(authOptions);
+  return Boolean(session);
+};
+
+const fetchMoneySpend = async (range: string): Promise<string> => {
   const sheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
 
   if (!sheetName) {
@@ -8,21 +16,38 @@ const fetchMoneySpend = async (range: string): Promise<number> => {
   }
 
   try {
-    return await getSheetValues({ sheetName, range }).then(values => values[0][0]);
+    return await getSheetValues({ sheetName, range }).then(values => `${values[0][0].toLocaleString()}원`);
   } catch (error) {
     throw new Error(error as string);
   }
 };
 
 export default async function MoneySpendBoard(): Promise<React.ReactElement> {
-  const fetchAllMoneySpend = async (): Promise<{ label: string; amount: string }[]> => {
-    const spendCodes = ['C24', 'C26', 'C25'];
-    const labels = ['🐶 빵떡', '💵 합계', '🐻‍❄️ 무민'];
+  const spendCodes = ['C24', 'C26', 'C25'];
+  const labels = ['🐶 빵떡', '💵 합계', '🐻‍❄️ 무민'];
 
+  if (!(await checkSession())) {
+    return (
+      <div className="flex flex-col gap-1">
+        <div className="flex flex-row justify-around">
+          {labels.map(label => (
+            <div className="flex flex-col items-center gap-1" key={label}>
+              <p className="text-lg font-semibold">{label}</p>
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <Link href="/api/auth/signin">로그인이 필요합니다.</Link>
+        </div>
+      </div>
+    );
+  }
+
+  const fetchAllMoneySpend = async (): Promise<{ label: string; amount: string }[]> => {
     return Promise.all(spendCodes.map(fetchMoneySpend)).then(spends =>
       spends.map((spend, index) => ({
         label: labels[index],
-        amount: `${spend.toLocaleString()}원`,
+        amount: spend,
       }))
     );
   };
