@@ -31,9 +31,11 @@ export function MobileNav(): React.ReactElement {
           Moomin Money
         </MobileLink>
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-          <MobileLink href="/moneybook" onOpenChange={setOpen}>
-            Moneybook
-          </MobileLink>
+          <div className="flex flex-col space-y-3">
+            <MobileLink href="/moneybook" onOpenChange={setOpen}>
+              Moneybook
+            </MobileLink>
+          </div>
         </ScrollArea>
       </SheetContent>
     </Sheet>
