@@ -25,7 +25,8 @@ export const formSchema = z.object({
   price: z
     .string()
     .min(1, '가격을 입력해주세요')
-    .transform(v => v.replace(/[^0-9]/g, ''))
+    .regex(/^\d+$/, '숫자만 입력해주세요')
+    .transform(v => v.replace(/^0+/, ''))
     .optional(),
   category: z.string().min(1, '카테고리를 입력해주세요').optional(),
   payment: z.string().min(1, '결제수단을 입력해주세요').optional(),
