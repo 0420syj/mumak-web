@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches-ignore: ['master']
+    branches: ['master', 'develop']
   pull_request:
     types: [opened, synchronize]
 
@@ -12,10 +12,10 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
 
-    # To use Remote Caching, uncomment the next lines and follow the steps below.
+    # Remote Caching
     env:
-     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
     steps:
       - name: Check out code
@@ -40,13 +40,14 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Pull Vercel Environment Information
-        run: |
-          vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
-          cp .vercel/.env.development.local apps/moomin-money/.env.development.local
+      # Can't use Vercel Environment Variables during the build process
+      # - name: Pull Vercel Environment Information
+      #   run: |
+      #     vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
+      #     cp .vercel/.env.development.local apps/moomin-money/.env.development.local
 
-      - name: Build
-        run: pnpm build
+      # - name: Build
+      #   run: pnpm build
 
       - name: Test
         run: pnpm test
