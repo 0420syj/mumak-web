@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Input } from "@ui/components/ui/input";
-import { Label } from "@ui/components/ui/label";
-import { Button } from "@ui/components/ui/button";
+import { Input } from '@ui/components/ui/input';
+import { Label } from '@ui/components/ui/label';
+import { Button } from '@ui/components/ui/button';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import {
   Form,
@@ -16,13 +16,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@ui/components/ui/form";
-import { Toaster, toast } from "@ui/components/ui/toast";
+} from '@ui/components/ui/form';
+import { Toaster, toast } from '@ui/components/ui/toast';
 
 const meta: Meta<typeof Input> = {
-  title: "Components/UI/Input",
+  title: 'Components/UI/Input',
   component: Input,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -30,14 +30,14 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
   args: {
-    type: "email",
-    placeholder: "Email",
+    type: 'email',
+    placeholder: 'Email',
   },
 };
 
 export const File: Story = {
   decorators: [
-    (Story) => (
+    Story => (
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="picture">Picture</Label>
         <Story />
@@ -45,8 +45,8 @@ export const File: Story = {
     ),
   ],
   args: {
-    id: "picture",
-    type: "file",
+    id: 'picture',
+    type: 'file',
   },
 };
 
@@ -59,7 +59,7 @@ export const Disabled: Story = {
 
 export const WithLabel: Story = {
   decorators: [
-    (Story) => (
+    Story => (
       <div className="grid w-full max-w-sm items-center gap-1.5">
         <Label htmlFor="email">Email</Label>
         <Story />
@@ -68,13 +68,13 @@ export const WithLabel: Story = {
   ],
   args: {
     ...Default.args,
-    id: "email",
+    id: 'email',
   },
 };
 
 export const WithButton: Story = {
   decorators: [
-    (Story) => (
+    Story => (
       <div className="flex w-full max-w-sm items-center space-x-2">
         <Story />
         <Button type="submit">Subscribe</Button>
@@ -88,7 +88,7 @@ export const WithButton: Story = {
 
 export const FormStory: Story = {
   decorators: [
-    (Story) => (
+    Story => (
       <div className="flex w-full max-w-sm items-center space-x-2">
         <Toaster />
         <Story />
@@ -98,20 +98,20 @@ export const FormStory: Story = {
   render: () => {
     const FormSchema = z.object({
       username: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
+        message: 'Username must be at least 2 characters.',
       }),
     });
 
     const form = useForm<z.infer<typeof FormSchema>>({
       resolver: zodResolver(FormSchema),
       defaultValues: {
-        username: "",
+        username: '',
       },
     });
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
       toast({
-        title: "You submitted the following values:",
+        title: 'You submitted the following values:',
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -122,10 +122,7 @@ export const FormStory: Story = {
 
     return (
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
           <FormField
             control={form.control}
             name="username"
@@ -135,9 +132,7 @@ export const FormStory: Story = {
                 <FormControl>
                   <Input placeholder="shadcn" {...field} />
                 </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+                <FormDescription>This is your public display name.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}

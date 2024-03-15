@@ -8,11 +8,15 @@
       "./src/*/index.ts"
     ]
   },
+  "scripts": {
+    "lint": "eslint ."
+  },
   "dependencies": {
     "clsx": "^2.1.0",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "@repo/eslint-config": "workspace:*"
   }
 }
