@@ -19,17 +19,17 @@ export function DateFormField({ control }: { control: Control<z.infer<typeof for
       control={control}
       name="date"
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem>
           <FormLabel className="text-base">날짜</FormLabel>
           <FormControl>
             <Popover onOpenChange={setIsPopoverOpen} open={isPopoverOpen}>
               <PopoverTrigger asChild>
-                <FormControl>
+                <FormControl className="flex w-full">
                   <Button
                     className={cn('text-left font-normal', !field.value && 'text-muted-foreground')}
                     variant="outline"
                   >
-                    {field.value ? format(field.value, 'PPP (EEEEEE)', { locale: ko }) : <span>Pick a date</span>}
+                    {field.value ? format(field.value, 'MM/dd (EEEEEE)', { locale: ko }) : <span>Pick a date</span>}
                     <CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
                   </Button>
                 </FormControl>
