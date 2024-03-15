@@ -1,6 +1,7 @@
 import { MainNav } from '@moomin-money/components/main-nav';
 import { MobileNav } from '@moomin-money/components/mobile-nav';
 import { ModeToggle } from '@moomin-money/components/mode-toggle';
+import UserButton from './user-button';
 
 export function Header(): React.ReactElement {
   return (
@@ -8,8 +9,9 @@ export function Header(): React.ReactElement {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <MainNav />
         <MobileNav />
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <nav className="flex items-center">
+        <div className="flex flex-1 items-center space-x-2 justify-end">
+          <nav className="flex items-center space-x-4">
+            <UserButton />
             <ModeToggle />
           </nav>
         </div>
