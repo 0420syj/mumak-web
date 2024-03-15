@@ -1,17 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from "@ui/components/ui/button";
+import { Button } from '@ui/components/ui/button';
 
-import {
-  ChevronRightIcon,
-  EnvelopeOpenIcon,
-  ReloadIcon,
-} from "@radix-ui/react-icons";
+import { ChevronRightIcon, EnvelopeOpenIcon, ReloadIcon } from '@radix-ui/react-icons';
 
 const meta: Meta<typeof Button> = {
-  title: "Components/UI/Button",
+  title: 'Components/UI/Button',
   component: Button,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -19,49 +15,49 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    children: "Button",
+    children: 'Button',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    children: "Secondary",
-    variant: "secondary",
+    children: 'Secondary',
+    variant: 'secondary',
   },
 };
 
 export const Destructive: Story = {
   args: {
-    children: "Destructive",
-    variant: "destructive",
+    children: 'Destructive',
+    variant: 'destructive',
   },
 };
 
 export const Outline: Story = {
   args: {
-    children: "Outline",
-    variant: "outline",
+    children: 'Outline',
+    variant: 'outline',
   },
 };
 
 export const Ghost: Story = {
   args: {
-    children: "Ghost",
-    variant: "ghost",
+    children: 'Ghost',
+    variant: 'ghost',
   },
 };
 
 export const Link: Story = {
   args: {
-    children: "Link",
-    variant: "link",
+    children: 'Link',
+    variant: 'link',
   },
 };
 
 export const Icon: Story = {
   args: {
-    variant: "outline",
-    size: "icon",
+    variant: 'outline',
+    size: 'icon',
     children: <ChevronRightIcon className="h-4 w-4" />,
   },
 };
@@ -92,7 +88,7 @@ export const AsChild: Story = {
   args: {
     asChild: true,
     children: (
-      <a href="#" onClick={(e) => e.preventDefault()}>
+      <a href="#" onClick={e => e.preventDefault()}>
         Login
       </a>
     ),

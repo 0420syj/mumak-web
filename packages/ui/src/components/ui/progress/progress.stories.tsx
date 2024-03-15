@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Progress } from "@ui/components/ui/progress";
+import { Progress } from '@ui/components/ui/progress';
 
 const meta: Meta<typeof Progress> = {
-  title: "Components/UI/Progress",
+  title: 'Components/UI/Progress',
   component: Progress,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Progress>;
 
 export const Default: Story = {
   decorators: [
-    (Story) => (
+    Story => (
       <div>
         <Story />
       </div>
@@ -21,6 +21,6 @@ export const Default: Story = {
   ],
   args: {
     value: 33,
-    className: "w-[60%]",
+    className: 'w-[60%]',
   },
 };
