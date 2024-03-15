@@ -1,3 +1,3 @@
 # moomin-money
 
-빵빚무 가계부
+Moneybook management app for Breading Moomin(빵떡빚는 무민)
