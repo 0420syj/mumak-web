@@ -1,6 +1,7 @@
 import { MainNav } from '@moomin-money/components/main-nav';
 import { MobileNav } from '@moomin-money/components/mobile-nav';
 import { ModeToggle } from '@moomin-money/components/mode-toggle';
+import { LoginButton } from '@moomin-money/components/login-button';
 
 export function Header(): React.ReactElement {
   return (
@@ -10,6 +11,7 @@ export function Header(): React.ReactElement {
         <MobileNav />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <nav className="flex items-center">
+            <LoginButton />
             <ModeToggle />
           </nav>
         </div>
