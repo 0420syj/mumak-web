@@ -11,9 +11,7 @@ import { DateFormField } from './block/date-form-field';
 import { ContentFormField } from './block/content-form-field';
 import { PriceFormField } from './block/price-form-field';
 import { CategoryFormField } from './block/category-form-field';
-import { CategoryFormFieldV2 } from './block/category-form-field-v2';
 import { PaymentFormField } from './block/payment-form-field';
-import { PaymentFormFieldV2 } from './block/payment-form-field-v2';
 import { NoteFormField } from './block/note-form-field';
 
 export const formSchema = z.object({
@@ -70,13 +68,15 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
         }}
       >
         <NameFormField control={form.control} />
-        <DateFormField control={form.control} />
-        <ContentFormField control={form.control} />
-        <PriceFormField control={form.control} />
+
+        <div className="flex flex-col gap-8 sm:grid sm:grid-cols-3 sm:gap-8">
+          <DateFormField control={form.control} />
+          <ContentFormField control={form.control} />
+          <PriceFormField control={form.control} />
+        </div>
+
         <CategoryFormField control={form.control} />
-        <CategoryFormFieldV2 control={form.control} />
         <PaymentFormField control={form.control} />
-        <PaymentFormFieldV2 control={form.control} />
         <NoteFormField control={form.control} />
         <div className="space-x-4">
           <Button type="submit">입력</Button>
