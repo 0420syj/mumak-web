@@ -6,14 +6,16 @@ import type { formSchema } from '../home-form';
 
 interface RadioOption {
   id: string;
+  icon: string;
   label: string;
+  value: string;
 }
 
 const radioOptions: RadioOption[] = [
-  { id: 'credit-card', label: '💳 신용카드' },
-  { id: 'cash', label: '💵 현금' },
-  { id: 'zero-pay', label: '💲 제로페이' },
-  { id: 'installment', label: '➗ 할부' },
+  { id: 'credit-card', icon: '💳', label: '신용카드', value: '💳 신용카드' },
+  { id: 'cash', icon: '💵', label: '현금', value: '💵 현금' },
+  { id: 'zero-pay', icon: '💲', label: '제로페이', value: '💲 제로페이' },
+  { id: 'installment', icon: '➗', label: '할부', value: '➗ 할부' },
 ];
 
 export function PaymentFormField({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
@@ -37,10 +39,16 @@ export function PaymentFormField({ control }: { control: Control<z.infer<typeof 
                     />
                   </FormControl>
                   <FormLabel
-                    className="flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                    className="sm:hidden flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                     htmlFor={option.id}
                   >
-                    {option.label}
+                    {field.value === option.label ? option.label : option.icon}
+                  </FormLabel>
+                  <FormLabel
+                    className="hidden sm:flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                    htmlFor={option.id}
+                  >
+                    {option.value}
                   </FormLabel>
                 </FormItem>
               ))}

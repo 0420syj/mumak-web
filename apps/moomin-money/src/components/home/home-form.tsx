@@ -78,8 +78,10 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
         <CategoryFormField control={form.control} />
         <PaymentFormField control={form.control} />
         <NoteFormField control={form.control} />
-        <div className="space-x-4">
-          <Button type="submit">입력</Button>
+        <div className="flex flex-row space-x-4">
+          <Button className="flex flex-1" type="submit">
+            입력
+          </Button>
           <Button
             onClick={() => {
               form.reset();
