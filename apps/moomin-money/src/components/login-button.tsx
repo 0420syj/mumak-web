@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { buttonVariants } from '@ui/components/ui/button';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@moomin-money/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@moomin-money/libs/auth';
 
 export async function LoginButton(): Promise<React.ReactElement> {
   const session = await getServerSession(authOptions);
