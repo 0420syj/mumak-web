@@ -27,7 +27,11 @@ export function PaymentFormField({ control }: { control: Control<z.infer<typeof 
         <FormItem>
           <FormLabel className="text-base">결제수단</FormLabel>
           <FormControl>
-            <RadioGroup className="grid grid-cols-4 gap-4" defaultValue={field.value} onValueChange={field.onChange}>
+            <RadioGroup
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+              defaultValue={field.value}
+              onValueChange={field.onChange}
+            >
               {radioOptions.map(option => (
                 <FormItem className="flex items-center justify-center" key={option.id}>
                   <FormControl>
