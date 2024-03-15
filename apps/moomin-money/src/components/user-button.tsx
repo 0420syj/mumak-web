@@ -8,6 +8,7 @@ import {
 import { Button } from '@repo/ui/button';
 import { getServerSession } from 'next-auth/next';
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/avatar';
+import { Skeleton } from '@repo/ui/skeleton';
 import { authOptions } from '@moomin-money/libs/auth';
 import { SignIn, SignOut } from './auth-components';
 
@@ -22,7 +23,9 @@ export default async function UserButton(): Promise<React.ReactElement> {
           <Button className="relative w-8 h-8 rounded-full" variant="ghost">
             <Avatar className="w-8 h-8">
               {session.user.image ? <AvatarImage alt={session.user.name ?? ''} src={session.user.image} /> : null}
-              <AvatarFallback>{session.user.email}</AvatarFallback>
+              <AvatarFallback asChild>
+                <Skeleton className="w-8 h-8 rounded-full" />
+              </AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
