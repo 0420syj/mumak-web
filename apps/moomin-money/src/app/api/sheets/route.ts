@@ -8,13 +8,10 @@ import type { formSchema } from '@moomin-money/components/home/home-form';
 
 const googleSheetsService = new GoogleSheetsService();
 
-const sheetNameMap = {
-  wanny: process.env.GOOGLE_WANNY_SHEET_NAME,
-  moomin: process.env.GOOGLE_MOOMIN_SHEET_NAME,
-};
-
-interface RequestInterface extends Omit<z.infer<typeof formSchema>, 'date'> {
+interface RequestInterface extends Omit<z.infer<typeof formSchema>, 'date' | 'name' | 'price'> {
   date: number;
+  name?: string;
+  price: number;
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -27,16 +24,33 @@ export async function POST(request: Request): Promise<NextResponse> {
   try {
     const requestData = (await request.json()) as RequestInterface;
     requestData.date = convertDateToSerial(new Date(requestData.date));
+    requestData.price = Number(requestData.price);
+
+    if (!process.env.GOOGLE_SPREADSHEET_ID) {
+      throw new Error('GOOGLE_SPREADSHEET_ID is not set');
+    }
+
+    if (!process.env.GOOGLE_WANNY_SHEET_NAME || !process.env.GOOGLE_MOOMIN_SHEET_NAME) {
+      throw new Error('GOOGLE_WANNY_SHEET_NAME or GOOGLE_MOOMIN_SHEET_NAME is not set');
+    }
+
+    const sheetNameMap: Record<string, string> = {
+      wanny: process.env.GOOGLE_WANNY_SHEET_NAME,
+      moomin: process.env.GOOGLE_MOOMIN_SHEET_NAME,
+    };
+
+    if (!requestData.name) {
+      throw new Error('Name is required');
+    }
+    const sheetName = sheetNameMap[requestData.name];
+    const range = `${sheetName}!${process.env.GOOGLE_SHEET_RANGE}`;
+
+    delete requestData.name;
     const valueData = [Object.values(requestData)];
 
-    // TODO: temporarily disabled
-    // const response = await googleSheetsService.postSheetValues(
-    //   process.env.GOOGLE_SPREADSHEET_ID as string,
-    //   (sheetNameMap[formData.name] + '!' + process.env.GOOGLE_SHEET_RANGE) as string,
-    //   valueData
-    // );
+    const response = await googleSheetsService.postSheetValues(process.env.GOOGLE_SPREADSHEET_ID, range, valueData);
 
-    return NextResponse.json({ data: valueData });
+    return NextResponse.json({ data: response });
   } catch (error: unknown) {
     return NextResponse.json({ error: "Couldn't post sheet values" }, { status: 500 });
   }
