@@ -42,8 +42,10 @@ export async function POST(request: Request): Promise<NextResponse> {
     if (!requestData.name) {
       throw new Error('Name is required');
     }
-    const sheetName =
-      process.env.NODE_ENV === 'development' ? process.env.GOOGLE_TEST_SHEET_NAME : sheetNameMap[requestData.name];
+    const sheetName = sheetNameMap[requestData.name];
+    // eslint-disable-next-line no-console -- This is a server-side function
+    console.log('sheetName', sheetName);
+
     const range = `${sheetName}!${process.env.GOOGLE_SHEET_RANGE}`;
 
     delete requestData.name;
@@ -53,6 +55,8 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     return NextResponse.json({ data: response });
   } catch (error: unknown) {
+    // eslint-disable-next-line no-console -- This is a server-side function
+    console.error('Failed to post sheet values via Google API', error);
     return NextResponse.json({ error: 'Failed to post sheet values via Google API' }, { status: 500 });
   }
 }
