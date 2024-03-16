@@ -16,7 +16,7 @@ import { PaymentFormField } from './block/payment-form-field';
 import { NoteFormField } from './block/note-form-field';
 
 export const formSchema = z.object({
-  name: z.enum(['wanny', 'moomin']),
+  name: z.enum(['wanny', 'moomin', '']),
   date: z
     .date({
       required_error: '날짜를 입력해주세요',

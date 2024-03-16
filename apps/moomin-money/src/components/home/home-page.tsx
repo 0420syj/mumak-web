@@ -47,7 +47,7 @@ async function HomePage(): Promise<React.ReactElement> {
       </section>
       <HomeForm
         defaultValues={{
-          name: session?.user?.email ? nameMap[session.user.email] : undefined,
+          name: session?.user?.email ? nameMap[session.user.email] : '',
         }}
       />
     </div>
