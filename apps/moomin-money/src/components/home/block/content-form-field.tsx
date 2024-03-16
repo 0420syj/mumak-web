@@ -13,7 +13,7 @@ export function ContentFormField({ control }: { control: Control<z.infer<typeof 
         <FormItem>
           <FormLabel className="text-base">내용</FormLabel>
           <FormControl>
-            <Input {...field} />
+            <Input {...field} className="text-base h-10" />
           </FormControl>
           <FormMessage />
         </FormItem>
