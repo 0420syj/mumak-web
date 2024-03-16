@@ -1,10 +1,10 @@
 interface GetSheetValuesRequestInterface {
   sheetName: string;
-  range: string;
+  range?: string;
 }
 
 interface GetSheetValuesResponseInterface {
-  values: number[][];
+  values: (number | string)[][];
 }
 
 export async function getSheetValues({
@@ -16,7 +16,7 @@ export async function getSheetValues({
     throw new Error('NEXT_PUBLIC_HOST is not set');
   }
 
-  const response = await fetch(`${host}/api/sheets/${sheetName}?range=${range}`, {
+  const response = await fetch(`${host}/api/sheets/${sheetName}${range ? `?range=${range}` : ''}`, {
     headers: {
       'Content-Type': 'application/json',
     },

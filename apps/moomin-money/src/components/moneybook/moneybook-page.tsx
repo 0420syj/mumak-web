@@ -1,3 +1,4 @@
+import WannyDataTable from './block/wanny-data-table';
 import DemoPage from './block/data-table/page';
 
 function MoneybookPage(): React.ReactElement {
@@ -5,6 +6,7 @@ function MoneybookPage(): React.ReactElement {
     <div className="container items-center space-y-8">
       Moneybook Page
       <DemoPage />
+      <WannyDataTable />
     </div>
   );
 }
