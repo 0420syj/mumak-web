@@ -59,3 +59,12 @@ export const convertToSerial = (date: string): number => {
 
   return utcDays + EPOCH_DIFFERENCE;
 };
+
+export const convertDateToSerial = (date: Date): number => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  const dateString = `${year}-${month}-${day}`;
+  return convertToSerial(dateString);
+};
