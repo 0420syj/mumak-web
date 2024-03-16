@@ -23,6 +23,13 @@ const meta: Meta<typeof Input> = {
   title: 'Components/UI/Input',
   component: Input,
   tags: ['autodocs'],
+  decorators: [
+    Story => (
+      <div>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;

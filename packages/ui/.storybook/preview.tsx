@@ -16,7 +16,7 @@ const preview: Preview = {
             <ModeToggle />
           </div>
           <div className="flex justify-center items-center w-full">
-            <div className="flex justify-center min-h-[350px] p-10 items-center">
+            <div className="flex w-full justify-center min-h-[350px] p-10 items-center">
               <Story />
             </div>
           </div>
