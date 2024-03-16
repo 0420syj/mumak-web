@@ -12,9 +12,19 @@ import { AuthProvider } from '@moomin-money/components/auth-provider';
 const notoSansKr = NotoSansKR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '빵빚무 가계부',
-  description: '빵빚무 가계부',
-  applicationName: '빵빚무 가계부',
+  metadataBase: new URL('https://mumak-web-moomin-money.vercel.app'),
+  title: {
+    template: '%s | Moomin Money',
+    default: 'Moomin Money',
+  },
+  keywords: 'Moneybook',
+  description: 'Moneybook web app for breading moomin',
+  applicationName: 'Moomin Money',
+  openGraph: {
+    type: 'website',
+    title: 'Moomin Money',
+    description: 'Moneybook web app for breading moomin',
+  },
   authors: {
     name: 'Wan Sim',
     url: 'https://wannysim.me',
@@ -24,6 +34,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1.0,
+  maximumScale: 1.0,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }): React.ReactElement {
