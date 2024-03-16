@@ -4,23 +4,33 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@moomin-money/libs/auth';
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 import { isVercelEnvProduction } from '@moomin-money/libs/vercel';
+import { DataTable } from './data-table/data-table';
+import type { Moneybook } from './wanny-columns';
+import { columns } from './wanny-columns';
 
 const checkSession = async (): Promise<boolean> => {
   const session = await getServerSession(authOptions);
   return Boolean(session);
 };
 
-function convertToDataTableData(response: (string | number)[][]) {
+function convertToDataTableData(response: (string | number)[][]): {
+  columnHeader: {
+    label: string | number;
+  }[];
+  data: Moneybook[];
+} {
   const [headerRow, ...dataRows] = response;
 
   const columnHeader = headerRow.map(header => ({
     label: header,
   }));
 
+  type MoneybookKey = keyof Moneybook;
+
   const data = dataRows.map(row => {
-    const rowData: Record<string, string | number> = {};
+    const rowData = {} as Moneybook;
     row.forEach((cell, index) => {
-      const key = headerRow[index];
+      const key = headerRow[index] as MoneybookKey;
       rowData[key] = cell;
     });
     return rowData;
@@ -61,11 +71,11 @@ export default async function WannyDataTable(): Promise<React.ReactElement> {
   const name = 'wanny';
 
   const [moneySpends] = await Promise.all([fetchMoneySpendList(name)]);
-  const { columnHeader, data } = convertToDataTableData(moneySpends);
+  const { data } = convertToDataTableData(moneySpends);
+
   return (
     <div>
-      <div>{JSON.stringify(columnHeader)}</div>
-      <div>{JSON.stringify(data)}</div>
+      <DataTable columns={columns} data={data} />
     </div>
   );
 }
