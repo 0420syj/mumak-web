@@ -49,11 +49,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     delete requestData.name;
     const valueData = [Object.values(requestData)];
 
-    const response = await googleSheetsService.postSheetValues(
-      process.env.GOOGLE_SPREADSHEET_ID + 23423,
-      range,
-      valueData
-    );
+    const response = await googleSheetsService.postSheetValues(process.env.GOOGLE_SPREADSHEET_ID, range, valueData);
 
     return NextResponse.json({ data: response });
   } catch (error: unknown) {
