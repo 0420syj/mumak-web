@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Progress>;
 export const Default: Story = {
   decorators: [
     Story => (
-      <div>
+      <div className="preview flex min-h-[350px] w-full self-stretch justify-center p-10 items-center">
         <Story />
       </div>
     ),

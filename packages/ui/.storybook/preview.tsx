@@ -11,12 +11,14 @@ const preview: Preview = {
   decorators: [
     Story => (
       <ThemeProvider defaultTheme="light">
-        <div className="flex flex-wrap items-center justify-center gap-8 w-full h-full">
-          <div className="flex flex-col items-center justify-center gap-8 p-8">
+        <div className="flex flex-col items-start justify-start gap-4 w-full h-full">
+          <div className="flex flex-row items-center justify-start rounded-lg bg-slate-300 w-full p-4">
             <ModeToggle />
           </div>
-          <div className="flex flex-col items-center justify-center gap-8 p-8 bg-red-500">
-            <Story />
+          <div className="flex justify-center items-center w-full">
+            <div className="flex justify-center min-h-[350px] p-10 items-center">
+              <Story />
+            </div>
           </div>
         </div>
       </ThemeProvider>
