@@ -2,10 +2,11 @@
 
 import { Form } from '@repo/ui/form';
 import { Button } from '@repo/ui/button';
-import { useToast } from '@repo/ui/toast';
+import { ToastAction, useToast } from '@repo/ui/toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { postSheetValues } from '@moomin-money/services/apis/post-sheets';
 import { NameFormField } from './block/name-form-field';
 import { DateFormField } from './block/date-form-field';
 import { ContentFormField } from './block/content-form-field';
@@ -15,7 +16,7 @@ import { PaymentFormField } from './block/payment-form-field';
 import { NoteFormField } from './block/note-form-field';
 
 export const formSchema = z.object({
-  name: z.enum(['wanny', 'moomin']).optional(),
+  name: z.enum(['wanny', 'moomin', '']),
   date: z
     .date({
       required_error: '날짜를 입력해주세요',
@@ -53,11 +54,32 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>): void {
-    toast({
-      title: '입력 완료',
-      description: <pre className="whitespace-pre-wrap">{JSON.stringify(values, null, 2)}</pre>,
-    });
+  async function onSubmit(values: z.infer<typeof formSchema>): Promise<void> {
+    try {
+      const response = await postSheetValues({ param: values });
+      toast({
+        title: '입력 완료',
+        description: <pre className="whitespace-pre-wrap">{JSON.stringify(response, null, 2)}</pre>,
+      });
+    } catch (error: unknown) {
+      toast({
+        title: '입력 실패',
+        description: (
+          <pre className="whitespace-pre-wrap">{JSON.stringify(error, Object.getOwnPropertyNames(error))}</pre>
+        ),
+        variant: 'destructive',
+        action: (
+          <ToastAction
+            altText="Login"
+            onClick={() => {
+              void form.handleSubmit(onSubmit)();
+            }}
+          >
+            다시 시도
+          </ToastAction>
+        ),
+      });
+    }
   }
 
   return (
