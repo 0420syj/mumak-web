@@ -74,7 +74,7 @@ export default async function MoneySpendBoard(): Promise<React.ReactElement> {
       <div className="flex flex-row justify-around">
         <div className="flex flex-col items-center gap-1">
           <p className="text-lg font-semibold">🚧 오류가 발생했습니다</p>
-          <p>지속적으로 발생할 경우 관리자에게 문의해주세요</p>
+          <p>다시 시도해주세요</p>
         </div>
       </div>
     );
