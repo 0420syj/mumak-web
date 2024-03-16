@@ -44,6 +44,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
     const sheetName =
       process.env.NODE_ENV === 'development' ? process.env.GOOGLE_TEST_SHEET_NAME : sheetNameMap[requestData.name];
+    // eslint-disable-next-line no-console -- This is a server-side function
+    console.log('sheetName', sheetName);
+
     const range = `${sheetName}!${process.env.GOOGLE_SHEET_RANGE}`;
 
     delete requestData.name;
