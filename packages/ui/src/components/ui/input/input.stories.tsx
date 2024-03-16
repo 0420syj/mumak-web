@@ -131,7 +131,7 @@ export const FormStory: Story = {
 
     return (
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 w-full">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
           <FormField
             control={form.control}
             name="username"
