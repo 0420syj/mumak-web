@@ -21,7 +21,9 @@ export async function postSheetValues({
   });
 
   if (!response.ok) {
-    throw new Error('Failed to post sheet values');
+    return response.text().then(text => {
+      throw new Error(text);
+    });
   }
 
   const { data } = (await response.json()) as PostSheetValuesResponseInterface;

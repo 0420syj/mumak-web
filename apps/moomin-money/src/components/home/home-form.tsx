@@ -66,7 +66,9 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
       toast({
         title: '입력 실패',
         description: (
-          <pre className="whitespace-pre-wrap">{JSON.stringify(error, Object.getOwnPropertyNames(error))}</pre>
+          <pre className="whitespace-pre-wrap">
+            {error instanceof Error ? error.message : JSON.stringify(error, null, 2)}
+          </pre>
         ),
         variant: 'destructive',
         action: (
