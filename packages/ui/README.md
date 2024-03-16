@@ -1,5 +1,16 @@
 # @repo/ui
 
+UI components for the `@repo` project.
+Built with [Vite](https://vitejs.dev/), [React](https://reactjs.org/), and [shadcn/ui](https://ui.shadcn.com/).
+
+Tested with [Storybook](https://storybook.js.org/).
+
+## Storybook
+
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://main--65e0ddfd5157def71497f3a5.chromatic.com/)
+
+## About this vite template
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

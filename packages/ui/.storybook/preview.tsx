@@ -11,40 +11,14 @@ const preview: Preview = {
   decorators: [
     Story => (
       <ThemeProvider defaultTheme="light">
-        <div
-          style={{
-            display: 'flex',
-            flexFlow: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '2rem',
-            width: '100%',
-            height: '100%',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '2rem',
-              padding: '2rem',
-            }}
-          >
+        <div className="flex flex-col items-start justify-start gap-4 w-full h-full">
+          <div className="flex flex-row items-center justify-start rounded-lg bg-slate-300 w-full p-4">
             <ModeToggle />
           </div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '2rem',
-              padding: '2rem',
-            }}
-          >
-            <Story />
+          <div className="flex justify-center items-center w-full">
+            <div className="flex w-full justify-center min-h-[350px] p-10 items-center">
+              <Story />
+            </div>
           </div>
         </div>
       </ThemeProvider>

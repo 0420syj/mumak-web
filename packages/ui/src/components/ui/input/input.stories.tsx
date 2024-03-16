@@ -23,6 +23,13 @@ const meta: Meta<typeof Input> = {
   title: 'Components/UI/Input',
   component: Input,
   tags: ['autodocs'],
+  decorators: [
+    Story => (
+      <div>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
@@ -89,9 +96,11 @@ export const WithButton: Story = {
 export const FormStory: Story = {
   decorators: [
     Story => (
-      <div className="flex w-full max-w-sm items-center space-x-2">
+      <div className="w-full">
         <Toaster />
-        <Story />
+        <div className="w-full">
+          <Story />
+        </div>
       </div>
     ),
   ],

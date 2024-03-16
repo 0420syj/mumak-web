@@ -22,6 +22,12 @@ export async function getSheetValues({
     },
   });
 
+  if (!response.ok) {
+    return response.text().then(text => {
+      throw new Error(text);
+    });
+  }
+
   const { values } = (await response.json()) as GetSheetValuesResponseInterface;
   return values;
 }

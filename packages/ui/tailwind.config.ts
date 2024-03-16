@@ -3,7 +3,7 @@ import sharedConfig from '@repo/tailwind-config';
 import tailwindAnimate from 'tailwindcss-animate';
 
 const config = {
-  content: ['./src/**/*.{md,mdx,ts,tsx}', '../../packages/ui/src/**/*.{md,mdx,ts,tsx}'],
+  content: ['./.storybook/preview.tsx', './src/**/*.{md,mdx,ts,tsx}', '../../packages/ui/src/**/*.{md,mdx,ts,tsx}'],
   presets: [sharedConfig],
   darkMode: ['class'],
   prefix: '',
