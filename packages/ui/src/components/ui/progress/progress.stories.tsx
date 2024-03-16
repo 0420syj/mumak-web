@@ -12,13 +12,6 @@ export default meta;
 type Story = StoryObj<typeof Progress>;
 
 export const Default: Story = {
-  decorators: [
-    Story => (
-      <div>
-        <Story />
-      </div>
-    ),
-  ],
   args: {
     value: 33,
     className: 'w-[60%]',
