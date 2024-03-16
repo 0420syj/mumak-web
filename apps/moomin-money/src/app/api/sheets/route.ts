@@ -18,7 +18,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: 'Login required' }, { status: 401 });
   }
 
   try {
@@ -49,10 +49,14 @@ export async function POST(request: Request): Promise<NextResponse> {
     delete requestData.name;
     const valueData = [Object.values(requestData)];
 
-    const response = await googleSheetsService.postSheetValues(process.env.GOOGLE_SPREADSHEET_ID, range, valueData);
+    const response = await googleSheetsService.postSheetValues(
+      process.env.GOOGLE_SPREADSHEET_ID + 23423,
+      range,
+      valueData
+    );
 
     return NextResponse.json({ data: response });
   } catch (error: unknown) {
-    return NextResponse.json({ error: "Couldn't post sheet values" }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to post sheet values via Google API' }, { status: 500 });
   }
 }
