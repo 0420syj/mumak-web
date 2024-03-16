@@ -26,7 +26,7 @@ export function DateFormField({ control }: { control: Control<z.infer<typeof for
               <PopoverTrigger asChild>
                 <FormControl className="flex w-full">
                   <Button
-                    className={cn('text-left font-normal', !field.value && 'text-muted-foreground')}
+                    className={cn('text-left font-normal text-base h-10', !field.value && 'text-muted-foreground')}
                     variant="outline"
                   >
                     {field.value ? format(field.value, 'MM/dd (EEEEEE)', { locale: ko }) : <span>Pick a date</span>}

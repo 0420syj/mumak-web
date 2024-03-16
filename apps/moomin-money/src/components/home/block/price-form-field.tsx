@@ -13,7 +13,7 @@ export function PriceFormField({ control }: { control: Control<z.infer<typeof fo
         <FormItem>
           <FormLabel className="text-base">가격</FormLabel>
           <FormControl>
-            <Input {...field} inputMode="numeric" />
+            <Input {...field} className="text-base h-10" inputMode="numeric" />
           </FormControl>
           <FormMessage />
         </FormItem>

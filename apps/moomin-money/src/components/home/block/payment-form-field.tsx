@@ -43,13 +43,13 @@ export function PaymentFormField({ control }: { control: Control<z.infer<typeof 
                     />
                   </FormControl>
                   <FormLabel
-                    className="sm:hidden flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                    className="sm:hidden flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary text-base"
                     htmlFor={option.id}
                   >
                     {field.value === option.value ? option.label : option.icon}
                   </FormLabel>
                   <FormLabel
-                    className="hidden sm:flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                    className="hidden sm:flex flex-col w-full items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary text-base"
                     htmlFor={option.id}
                   >
                     {option.value}
