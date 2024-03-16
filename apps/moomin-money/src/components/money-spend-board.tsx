@@ -54,16 +54,29 @@ export default async function MoneySpendBoard(): Promise<React.ReactElement> {
     );
   };
 
-  const [moneySpends] = await Promise.all([fetchAllMoneySpend()]);
+  try {
+    const [moneySpends] = await Promise.all([fetchAllMoneySpend()]);
 
-  return (
-    <div className="flex flex-row justify-around">
-      {moneySpends.map(({ label, amount }) => (
-        <div className="flex flex-col items-center gap-1" key={label}>
-          <p className="text-lg font-semibold">{label}</p>
-          <p>{amount}</p>
+    return (
+      <div className="flex flex-row justify-around">
+        {moneySpends.map(({ label, amount }) => (
+          <div className="flex flex-col items-center gap-1" key={label}>
+            <p className="text-lg font-semibold">{label}</p>
+            <p>{amount}</p>
+          </div>
+        ))}
+      </div>
+    );
+  } catch (error) {
+    // eslint-disable-next-line no-console -- This is a server-side function
+    console.error('Failed to fetch money spend', error);
+    return (
+      <div className="flex flex-row justify-around">
+        <div className="flex flex-col items-center gap-1">
+          <p className="text-lg font-semibold">🚧 오류가 발생했습니다</p>
+          <p>다시 시도해주세요</p>
         </div>
-      ))}
-    </div>
-  );
+      </div>
+    );
+  }
 }
