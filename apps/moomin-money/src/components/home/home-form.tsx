@@ -6,6 +6,7 @@ import { ToastAction, useToast } from '@repo/ui/toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { ReloadIcon } from '@radix-ui/react-icons';
 import { postSheetValues } from '@moomin-money/services/apis/post-sheets';
 import { NameFormField } from './block/name-form-field';
 import { DateFormField } from './block/date-form-field';
@@ -102,8 +103,15 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
         <PaymentFormField control={form.control} />
         <NoteFormField control={form.control} />
         <div className="flex flex-row space-x-4">
-          <Button className="flex flex-1" type="submit">
-            입력
+          <Button className="flex flex-1" disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting ? (
+              <>
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                입력 중...
+              </>
+            ) : (
+              '입력'
+            )}
           </Button>
           <Button
             onClick={() => {
