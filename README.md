@@ -1,10 +1,20 @@
 # Mumak Web
 
+<span>![GitHub Release](https://img.shields.io/github/v/release/0420syj/mumak-web)
+</span>
+<span>![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/0420syj/mumak-web/.github%2Fworkflows%2Fci.yml)</span>
+
+<span>![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=mumak-web-moomin-money)</span>
+<span>[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://main--65e0ddfd5157def71497f3a5.chromatic.com/)</span>
+
 Mumak on the WWW
 
 ## Introduction
 
 Monorepo for Mumak Web applications.
+
+- [Moomin Money](https://mumak-web-moomin-money.vercel.app/): a personal finance app
+- [UI](https://main--65e0ddfd5157def71497f3a5.chromatic.com/) : a component library with [shadcn/ui](https://ui.shadcn.com/)
 
 ## Structure
 
