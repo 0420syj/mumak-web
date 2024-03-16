@@ -96,9 +96,11 @@ export const WithButton: Story = {
 export const FormStory: Story = {
   decorators: [
     Story => (
-      <div className="flex w-full max-w-sm items-center space-x-2">
+      <div className="w-full">
         <Toaster />
-        <Story />
+        <div className="w-full">
+          <Story />
+        </div>
       </div>
     ),
   ],
@@ -129,7 +131,7 @@ export const FormStory: Story = {
 
     return (
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6 w-full">
           <FormField
             control={form.control}
             name="username"
