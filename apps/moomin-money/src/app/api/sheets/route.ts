@@ -53,6 +53,8 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     return NextResponse.json({ data: response });
   } catch (error: unknown) {
+    // eslint-disable-next-line no-console -- This is a server-side function
+    console.error('Failed to post sheet values via Google API', error);
     return NextResponse.json({ error: 'Failed to post sheet values via Google API' }, { status: 500 });
   }
 }
