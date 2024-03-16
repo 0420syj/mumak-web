@@ -42,7 +42,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     if (!requestData.name) {
       throw new Error('Name is required');
     }
-    const sheetName = sheetNameMap[requestData.name];
+    const sheetName =
+      process.env.NODE_ENV === 'development' ? process.env.GOOGLE_TEST_SHEET_NAME : sheetNameMap[requestData.name];
     const range = `${sheetName}!${process.env.GOOGLE_SHEET_RANGE}`;
 
     delete requestData.name;
