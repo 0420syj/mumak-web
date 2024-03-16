@@ -33,6 +33,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
     "@repo/lib": "workspace:*",
+    "@tanstack/react-table": "^8.13.2",
     "class-variance-authority": "^0.7.0",
     "date-fns": "^3.3.1",
     "react": "^18.2.0",
