@@ -18,6 +18,8 @@ const fetchMoneySpend = async (range: string): Promise<string> => {
   try {
     return await getSheetValues({ sheetName, range }).then(values => `${values[0][0].toLocaleString()}원`);
   } catch (error) {
+    // eslint-disable-next-line no-console -- This is a server-side function
+    console.error('Failed to fetch money spend', error);
     throw new Error(error as string);
   }
 };

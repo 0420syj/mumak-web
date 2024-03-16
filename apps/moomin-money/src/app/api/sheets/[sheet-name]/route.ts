@@ -19,6 +19,8 @@ export async function GET(
 
     return NextResponse.json({ values });
   } catch (error: unknown) {
-    return NextResponse.json({ error: "Couldn't get sheet values" }, { status: 500 });
+    // eslint-disable-next-line no-console -- This is a server-side function
+    console.error('Failed to get sheet values', error);
+    return NextResponse.json({ error: 'Failed to get sheet values' }, { status: 500 });
   }
 }
