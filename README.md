@@ -13,8 +13,8 @@ Mumak on the WWW
 
 Monorepo for Mumak Web applications.
 
-- [Moomin Money](https://mumak-web-moomin-money.vercel.app/): a personal finance app
-- [UI](https://main--65e0ddfd5157def71497f3a5.chromatic.com/) : a component library with [shadcn/ui](https://ui.shadcn.com/)
+- [Moomin Money](https://money.5231.kr): a personal finance app
+- [UI](https://main--65e0ddfd5157def71497f3a5.chromatic.com) : a component library with [shadcn/ui](https://ui.shadcn.com/)
 
 ## Structure
 
