@@ -12,7 +12,7 @@ export function Header(): React.ReactElement {
         <MainNav />
         <MobileNav />
         {!isVercelEnvProduction() && (
-          <div className="absolute top-1 left-1/2 transform -translate-x-1/2 text-xs text-accent-foreground">
+          <div className="absolute top-1 left-1/2 transform -translate-x-1/2 text-xs text-accent-foreground whitespace-nowrap">
             <ExclamationTriangleIcon className="inline-flex" />
             {' dev mode'}
           </div>
