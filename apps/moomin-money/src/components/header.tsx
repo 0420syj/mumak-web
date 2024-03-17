@@ -13,8 +13,8 @@ export function Header(): React.ReactElement {
         <MobileNav />
         {!isVercelEnvProduction() && (
           <div className="absolute top-1 left-1/2 transform -translate-x-1/2 text-xs text-accent-foreground">
-            <ExclamationTriangleIcon className="inline-flex" />{' '}
-            {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? 'dev mode'}
+            <ExclamationTriangleIcon className="inline-flex" />
+            {' dev mode'}
           </div>
         )}
         <div className="flex flex-1 items-center space-x-2 justify-end">
