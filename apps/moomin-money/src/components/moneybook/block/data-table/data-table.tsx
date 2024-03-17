@@ -45,6 +45,9 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         <DataTableFilter columnId="내용" placeholder="내용을 입력해주세요" table={table} />
         <DataTableViewOptions table={table} />
       </div>
+      <div className="flex-1 text-sm text-muted-foreground py-4">
+        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
