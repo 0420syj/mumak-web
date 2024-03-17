@@ -55,7 +55,7 @@ export const columns: ColumnDef<Moneybook>[] = [
       const data = parseFloat(row.getValue('날짜'));
       const formatted = convertToDate(data).toLocaleDateString();
 
-      return <div className="text-left font-medium">{formatted}</div>;
+      return <div className="text-left">{formatted}</div>;
     },
   },
   {
@@ -65,6 +65,12 @@ export const columns: ColumnDef<Moneybook>[] = [
   {
     header: ({ column }) => <DataTableColumnHeader column={column} title="금액" />,
     accessorKey: '금액',
+    cell: ({ row }) => {
+      const data = parseFloat(row.getValue('금액'));
+      const formatted = data.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' });
+
+      return <div className="text-right">{formatted}</div>;
+    },
   },
   {
     header: ({ column }) => <DataTableColumnHeader column={column} title="카테고리" />,

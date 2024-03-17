@@ -3,8 +3,8 @@
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 import { isVercelEnvProduction } from '@moomin-money/libs/vercel';
 import { isSessionValid } from '@moomin-money/libs/auth';
-import type { Moneybook } from '../wanny-columns';
-import { columns } from '../wanny-columns';
+import type { Moneybook } from './data-table-columns';
+import { columns } from './data-table-columns';
 import { DataTable } from './data-table';
 
 function convertToDataTableData(response: (string | number)[][]): {
