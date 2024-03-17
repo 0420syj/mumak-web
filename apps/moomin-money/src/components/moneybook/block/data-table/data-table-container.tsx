@@ -3,9 +3,9 @@
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 import { isVercelEnvProduction } from '@moomin-money/libs/vercel';
 import { isSessionValid } from '@moomin-money/libs/auth';
-import { DataTable } from './data-table/data-table';
-import type { Moneybook } from './wanny-columns';
-import { columns } from './wanny-columns';
+import type { Moneybook } from '../wanny-columns';
+import { columns } from '../wanny-columns';
+import { DataTable } from './data-table';
 
 function convertToDataTableData(response: (string | number)[][]): {
   columnHeader: {
@@ -57,7 +57,7 @@ const fetchMoneySpendList = async (name: 'wanny' | 'moomin'): Promise<(string | 
   }
 };
 
-export default async function WannyDataTable({ name }: { name: 'wanny' | 'moomin' }): Promise<React.ReactElement> {
+export default async function DataTableContainer({ name }: { name: 'wanny' | 'moomin' }): Promise<React.ReactElement> {
   if (!(await isSessionValid())) {
     return <div className="flex flex-col gap-1">로그인이 필요합니다.</div>;
   }

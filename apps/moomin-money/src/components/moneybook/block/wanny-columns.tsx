@@ -1,7 +1,7 @@
 'use client';
 
 import type { ColumnDef } from '@tanstack/react-table';
-import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableColumnHeader } from '@repo/ui/data-table';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.

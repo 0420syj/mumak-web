@@ -1,9 +1,9 @@
-import WannyDataTable from './block/wanny-data-table';
+import DataTableContainer from './block/data-table/data-table-container';
 
 function MoneybookPage(): React.ReactElement {
   return (
     <div className="container items-center space-y-8">
-      <WannyDataTable name="wanny" />
+      <DataTableContainer name="wanny" />
     </div>
   );
 }
