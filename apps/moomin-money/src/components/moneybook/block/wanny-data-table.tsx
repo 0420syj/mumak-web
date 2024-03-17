@@ -57,19 +57,13 @@ const fetchMoneySpendList = async (name: 'wanny' | 'moomin'): Promise<(string | 
   }
 };
 
-export default async function WannyDataTable(): Promise<React.ReactElement> {
+export default async function WannyDataTable({ name }: { name: 'wanny' | 'moomin' }): Promise<React.ReactElement> {
   if (!(await isSessionValid())) {
     return <div className="flex flex-col gap-1">로그인이 필요합니다.</div>;
   }
 
-  const name = 'wanny';
-
   const [moneySpends] = await Promise.all([fetchMoneySpendList(name)]);
   const { data } = convertToDataTableData(moneySpends);
 
-  return (
-    <div>
-      <DataTable columns={columns} data={data} />
-    </div>
-  );
+  return <DataTable columns={columns} data={data} />;
 }
