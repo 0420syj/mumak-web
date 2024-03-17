@@ -1,10 +1,7 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion -- safe */
-
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@repo/ui/skeleton';
-import { getServerSession } from 'next-auth';
 import { HomeForm } from '@moomin-money/components/home/home-form';
-import { authOptions } from '@moomin-money/libs/auth';
+import { getUserName } from '@moomin-money/libs/auth';
 
 function SkeletonLoading(): React.ReactElement {
   return (
@@ -31,14 +28,7 @@ const MoneySpendBoard = dynamic(() => import('@moomin-money/components/money-spe
 });
 
 async function HomePage(): Promise<React.ReactElement> {
-  const session = await getServerSession(authOptions);
-
-  const allowedAccountList: string[] = process.env.GOOGLE_ACCOUNT_LIST!.split(',');
-
-  const nameMap: Record<string, 'wanny' | 'moomin'> = {
-    [allowedAccountList[0]]: 'wanny',
-    [allowedAccountList[1]]: 'moomin',
-  };
+  const name = await getUserName();
 
   return (
     <div className="container items-center space-y-8">
@@ -47,7 +37,7 @@ async function HomePage(): Promise<React.ReactElement> {
       </section>
       <HomeForm
         defaultValues={{
-          name: session?.user?.email ? nameMap[session.user.email] : '',
+          name,
         }}
       />
     </div>
