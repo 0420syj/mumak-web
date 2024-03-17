@@ -1,12 +1,6 @@
-import { getServerSession } from 'next-auth';
 import Link from 'next/link';
-import { authOptions } from '@moomin-money/libs/auth';
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
-
-const checkSession = async (): Promise<boolean> => {
-  const session = await getServerSession(authOptions);
-  return Boolean(session);
-};
+import { isSessionValid } from '@moomin-money/libs/auth';
 
 const fetchMoneySpend = async (range: string): Promise<string> => {
   const sheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
@@ -28,7 +22,7 @@ export default async function MoneySpendBoard(): Promise<React.ReactElement> {
   const spendCodes = ['C24', 'C26', 'C25'];
   const labels = ['🐶 빵떡', '💵 합계', '🐻‍❄️ 무민'];
 
-  if (!(await checkSession())) {
+  if (!(await isSessionValid())) {
     return (
       <div className="flex flex-col gap-1">
         <div className="flex flex-row justify-around">

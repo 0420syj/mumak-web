@@ -10,7 +10,12 @@ export async function GET(
 ): Promise<NextResponse> {
   try {
     const { 'sheet-name': sheetName } = params;
-    const range = request.nextUrl.searchParams.get('range');
+
+    if (!process.env.GOOGLE_SHEET_RANGE) {
+      throw new Error('GOOGLE_SHEET_RANGE is not set');
+    }
+
+    const range = request.nextUrl.searchParams.get('range') || process.env.GOOGLE_SHEET_RANGE;
 
     if (!process.env.GOOGLE_SPREADSHEET_ID) {
       throw new Error('GOOGLE_SPREADSHEET_ID is not set');

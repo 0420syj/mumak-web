@@ -18,3 +18,6 @@ export * from './form';
 export * from './scroll-area';
 export * from './sheet';
 export * from './checkbox';
+export * from './tabs';
+export * from './select';
+export * from './data-table';
