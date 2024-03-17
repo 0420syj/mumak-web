@@ -9,8 +9,12 @@ async function MoneybookPage(): Promise<React.ReactElement> {
     <div className="container items-center space-y-8">
       <Tabs defaultValue={name}>
         <TabsList className="flex gap-4">
-          <TabsTrigger value="wanny">🐶 빵떡</TabsTrigger>
-          <TabsTrigger value="moomin">🐻‍❄️ 무민</TabsTrigger>
+          <TabsTrigger className="w-full" value="wanny">
+            🐶 빵떡
+          </TabsTrigger>
+          <TabsTrigger className="w-full" value="moomin">
+            🐻‍❄️ 무민
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="wanny">
           <DataTableContainer name="wanny" />
