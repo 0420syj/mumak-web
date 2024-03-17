@@ -3,6 +3,7 @@
 
 import { type NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { getServerSession } from 'next-auth';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -19,4 +20,9 @@ export const authOptions: NextAuthOptions = {
       return false;
     },
   },
+};
+
+export const isSessionValid = async (): Promise<boolean> => {
+  const session = await getServerSession(authOptions);
+  return Boolean(session);
 };

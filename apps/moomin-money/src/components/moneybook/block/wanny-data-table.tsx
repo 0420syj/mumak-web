@@ -1,17 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion -- safe */
 
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@moomin-money/libs/auth';
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 import { isVercelEnvProduction } from '@moomin-money/libs/vercel';
+import { isSessionValid } from '@moomin-money/libs/auth';
 import { DataTable } from './data-table/data-table';
 import type { Moneybook } from './wanny-columns';
 import { columns } from './wanny-columns';
-
-const checkSession = async (): Promise<boolean> => {
-  const session = await getServerSession(authOptions);
-  return Boolean(session);
-};
 
 function convertToDataTableData(response: (string | number)[][]): {
   columnHeader: {
@@ -64,7 +58,7 @@ const fetchMoneySpendList = async (name: 'wanny' | 'moomin'): Promise<(string | 
 };
 
 export default async function WannyDataTable(): Promise<React.ReactElement> {
-  if (!(await checkSession())) {
+  if (!(await isSessionValid())) {
     return <div className="flex flex-col gap-1">로그인이 필요합니다.</div>;
   }
 
