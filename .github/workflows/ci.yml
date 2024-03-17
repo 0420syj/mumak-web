@@ -5,7 +5,7 @@ env:
 
 on:
   push:
-    branches: ['main', 'develop', 'feature/moneybook'] # feature/moneybook is for testing purposes
+    branches: ['main', 'develop']
   pull_request:
     types: [opened, synchronize]
 
@@ -43,7 +43,6 @@ jobs:
       - name: Install Vercel CLI
         run: pnpm install --global vercel@latest
 
-      # Can't use Vercel Environment Variables during the build process
       - name: Pull Vercel Environment Information
         run: |
           vercel env pull apps/moomin-money/.env.local --token=${{ secrets.VERCEL_TOKEN }}
