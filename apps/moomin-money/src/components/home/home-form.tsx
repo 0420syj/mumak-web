@@ -73,7 +73,7 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
         variant: 'destructive',
         action: (
           <ToastAction
-            altText="Login"
+            altText="다시 시도"
             onClick={() => {
               void form.handleSubmit(onSubmit)();
             }}

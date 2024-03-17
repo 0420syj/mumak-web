@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises -- safe to ignore */
 'use client';
 
 import type { ColumnDef } from '@tanstack/react-table';
@@ -9,10 +10,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@repo/ui/dropdown-menu';
+import { ToastAction, useToast } from '@repo/ui/toast';
 
 export interface Moneybook extends Record<string, string | number> {
   날짜: number;
@@ -83,6 +84,8 @@ export const columns: ColumnDef<Moneybook>[] = [
   {
     id: 'actions',
     cell: ({ row }) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks -- safe to ignore
+      const { toast } = useToast();
       const rowData = row.original;
 
       return (
@@ -94,11 +97,27 @@ export const columns: ColumnDef<Moneybook>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            {/* eslint-disable-next-line @typescript-eslint/no-misused-promises -- safe */}
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rowData.비고)}>비고 복사</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                toast({
+                  title: '상세 보기',
+                  description: <pre className="whitespace-pre-wrap">{JSON.stringify(rowData, null, 2)}</pre>,
+                  action: (
+                    <ToastAction
+                      altText="복사"
+                      onClick={() => navigator.clipboard.writeText(JSON.stringify(rowData, null, 2))}
+                    >
+                      복사
+                    </ToastAction>
+                  ),
+                });
+              }}
+            >
+              상세 보기
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>상세 보기</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rowData.내용)}>내용 복사</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rowData.비고)}>비고 복사</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
