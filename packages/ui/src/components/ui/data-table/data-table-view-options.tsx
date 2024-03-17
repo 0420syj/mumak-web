@@ -21,9 +21,13 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="ml-auto text-base h-10 flex font-normal">
-          <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          보기
+        <Button
+          variant="outline"
+          size="sm"
+          className="ml-auto text-base h-10 flex font-normal items-center justify-center gap-2"
+        >
+          <MixerHorizontalIcon className="h-4 w-4" />
+          <div className="hidden sm:block">보기</div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

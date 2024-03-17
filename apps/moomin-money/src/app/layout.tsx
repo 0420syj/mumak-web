@@ -12,7 +12,7 @@ import { AuthProvider } from '@moomin-money/components/auth-provider';
 const notoSansKr = NotoSansKR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mumak-web-moomin-money.vercel.app'),
+  metadataBase: new URL('https://money.5231.kr'),
   title: {
     template: '%s | Moomin Money',
     default: 'Moomin Money',

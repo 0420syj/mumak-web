@@ -20,7 +20,12 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>): React.ReactElement {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([
+    {
+      id: '날짜',
+      desc: true,
+    },
+  ]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
@@ -45,10 +50,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         <DataTableFilter columnId="내용" placeholder="내용을 입력해주세요" table={table} />
         <DataTableViewOptions table={table} />
       </div>
-      <div className="flex-1 text-sm text-muted-foreground py-4">
-        {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
-      <div className="flex items-center py-2">
+      <div className="flex items-center pb-2">
         <DataTablePagination table={table} />
       </div>
       <div className="rounded-md border">
