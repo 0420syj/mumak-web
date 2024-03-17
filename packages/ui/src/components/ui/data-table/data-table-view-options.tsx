@@ -21,13 +21,13 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="ml-auto hidden h-8 lg:flex">
+        <Button variant="outline" size="sm" className="ml-auto text-base h-10 flex font-normal">
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          View
+          보기
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>컬럼명</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
