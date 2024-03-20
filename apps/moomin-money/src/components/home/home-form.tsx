@@ -56,6 +56,11 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>): Promise<void> {
+    const activeElement = document.activeElement as HTMLElement | null;
+    if (activeElement) {
+      activeElement.blur();
+    }
+
     try {
       const response = await postSheetValues({ param: values });
       toast({
