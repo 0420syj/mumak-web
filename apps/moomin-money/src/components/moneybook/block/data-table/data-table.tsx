@@ -53,6 +53,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
       <div className="flex items-center pb-2">
         <DataTablePagination table={table} />
       </div>
+      <p className="text-xs text-muted-foreground pb-2">이번 달 마지막 날까지만 표시됩니다.</p>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
