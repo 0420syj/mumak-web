@@ -18,11 +18,20 @@ export function MainNav(): React.ReactElement {
         <Link
           className={cn(
             'transition-colors hover:text-foreground/80',
-            pathname === '/moneybook' ? 'text-foreground' : 'text-foreground/60'
+            pathname === '/' ? 'text-foreground' : 'text-foreground/40'
+          )}
+          href="/"
+        >
+          입력
+        </Link>
+        <Link
+          className={cn(
+            'transition-colors hover:text-foreground/80',
+            pathname === '/moneybook' ? 'text-foreground' : 'text-foreground/40'
           )}
           href="/moneybook"
         >
-          Moneybook
+          소비내역
         </Link>
       </nav>
     </div>
