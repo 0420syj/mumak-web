@@ -38,6 +38,12 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
 
+    initialState: {
+      columnVisibility: {
+        결제수단: false,
+        비고: false,
+      },
+    },
     state: {
       sorting,
       columnFilters,
