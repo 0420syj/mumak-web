@@ -27,7 +27,7 @@ export const formSchema = z.object({
   price: z
     .string()
     .min(1, '가격을 입력해주세요')
-    .refine(v => /^\d+$/.test(v), {
+    .refine(v => /^[0-9,]*$/.test(v), {
       message: '숫자만 입력해주세요',
     })
     .transform(v => v.replace(/[^0-9]/g, ''))
