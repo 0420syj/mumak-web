@@ -6,13 +6,21 @@ import type { formSchema } from '../home-form';
 
 export function PriceFormField({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
   const addComma = (value: string): string => {
+    if (value === '-' || value === '') {
+      return value;
+    }
+
     return Number(value).toLocaleString();
   };
   const removeNonNumber = (value: string): string => {
-    return value.replace(/[^0-9]/g, '');
+    return value.replace(/[^0-9-]/g, '');
   };
   const isNumber = (value: string): boolean => {
-    return /^\d+$/.test(value);
+    if (value === '-' || value === '') {
+      return true;
+    }
+
+    return /^-?\d+$/.test(value);
   };
 
   return (
@@ -29,7 +37,6 @@ export function PriceFormField({ control }: { control: Control<z.infer<typeof fo
               inputMode="numeric"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const value = removeNonNumber(event.target.value);
-
                 if (!isNumber(value)) {
                   return;
                 }
