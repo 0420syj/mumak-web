@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { ReloadIcon } from '@radix-ui/react-icons';
+import { useRouter } from 'next/navigation';
 import { postSheetValues } from '@moomin-money/services/apis/post-sheets';
 import { NameFormField } from './block/name-form-field';
 import { DateFormField } from './block/date-form-field';
@@ -43,6 +44,7 @@ interface HomeFormProps {
 
 export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,6 +91,8 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
           </ToastAction>
         ),
       });
+    } finally {
+      router.refresh();
     }
   }
 
