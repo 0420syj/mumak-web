@@ -28,10 +28,6 @@ export async function POST(request: Request): Promise<NextResponse> {
     requestData.date = convertJSDateToExcelSerialDate(new Date(requestData.date));
     requestData.price = Number(requestData.price);
 
-    if (!process.env.GOOGLE_SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SPREADSHEET_ID is not set');
-    }
-
     if (!process.env.GOOGLE_WANNY_SHEET_NAME || !process.env.GOOGLE_MOOMIN_SHEET_NAME) {
       throw new Error('GOOGLE_WANNY_SHEET_NAME or GOOGLE_MOOMIN_SHEET_NAME is not set');
     }
@@ -50,7 +46,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     delete requestData.name;
     const valueData = [Object.values(requestData)];
 
-    const response = await googleSheetsService.postSheetValues(process.env.GOOGLE_SPREADSHEET_ID, range, valueData);
+    const response = await googleSheetsService.postSheetValues(range, valueData);
 
     return NextResponse.json({ data: response });
   } catch (error: unknown) {
