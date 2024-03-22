@@ -8,6 +8,7 @@ import { Input } from '@repo/ui/input';
 import { getSession } from 'next-auth/react';
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 import { isVercelEnvProduction } from '@moomin-money/libs/vercel';
+import { includeByCho } from '@moomin-money/libs/search';
 import type { formSchema } from '../home-form';
 
 export function NoteFormField({ control }: { control: Control<z.infer<typeof formSchema>> }): React.ReactElement {
@@ -36,7 +37,7 @@ export function NoteFormField({ control }: { control: Control<z.infer<typeof for
         if (typeof note !== 'string') {
           return false;
         }
-        return note.includes(value);
+        return includeByCho(value, note);
       })
       .map(item => {
         const [note] = item;
