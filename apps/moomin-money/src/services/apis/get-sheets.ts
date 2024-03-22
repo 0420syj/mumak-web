@@ -11,12 +11,7 @@ export async function getSheetValues({
   sheetName,
   range,
 }: GetSheetValuesRequestInterface): Promise<GetSheetValuesResponseInterface['values']> {
-  const host = process.env.NEXT_PUBLIC_HOST;
-  if (!host) {
-    throw new Error('NEXT_PUBLIC_HOST is not set');
-  }
-
-  const response = await fetch(`${host}/api/sheets/${sheetName}${range ? `?range=${range}` : ''}`, {
+  const response = await fetch(`/api/sheets/${sheetName}${range && `?range=${range}`}`, {
     headers: {
       'Content-Type': 'application/json',
     },
