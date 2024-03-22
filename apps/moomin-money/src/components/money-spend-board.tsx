@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Skeleton } from '@repo/ui/skeleton';
-import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 import { isSessionValid } from '@moomin-money/libs/auth';
+import { GoogleSheetsService } from '@moomin-money/services/google-sheets-service';
 
 export function MoneySpendBoardSkeleton(): React.ReactElement {
   return (
@@ -23,6 +23,7 @@ export function MoneySpendBoardSkeleton(): React.ReactElement {
 }
 
 const fetchMoneySpend = async (range: string): Promise<string> => {
+  const googleSheetsService = new GoogleSheetsService();
   const sheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
 
   if (!sheetName) {
@@ -30,7 +31,9 @@ const fetchMoneySpend = async (range: string): Promise<string> => {
   }
 
   try {
-    return await getSheetValues({ sheetName, range }).then(values => `${values[0][0].toLocaleString()}원`);
+    return await googleSheetsService
+      .getSheetValues(`${sheetName}!${range}`)
+      .then(values => `${values[0][0].toLocaleString()}원`);
   } catch (error) {
     // eslint-disable-next-line no-console -- This is a server-side function
     console.error('Failed to fetch money spend', error);
