@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth/next';
 import { convertJSDateToExcelSerialDate } from '@repo/lib';
 import type { z } from 'zod';
 import { GoogleSheetsService } from '@moomin-money/services/google-sheets-service';
-import { authOptions } from '@moomin-money/libs/auth';
+import { isSessionValid } from '@moomin-money/libs/auth';
 import type { formSchema } from '@moomin-money/components/home/home-form';
 import { isVercelEnvProduction } from '@moomin-money/libs/vercel';
 
@@ -16,9 +16,7 @@ interface RequestInterface extends Omit<z.infer<typeof formSchema>, 'date' | 'na
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
+  if (!(await isSessionValid())) {
     return NextResponse.json({ error: 'Login required' }, { status: 401 });
   }
 
