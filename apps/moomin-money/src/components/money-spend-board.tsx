@@ -1,6 +1,26 @@
 import Link from 'next/link';
+import { Skeleton } from '@repo/ui/skeleton';
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 import { isSessionValid } from '@moomin-money/libs/auth';
+
+export function MoneySpendBoardSkeleton(): React.ReactElement {
+  return (
+    <div className="flex flex-row justify-around">
+      <div className="flex flex-col items-center gap-1">
+        <Skeleton className="w-[60px] h-[28px]" />
+        <Skeleton className="w-[64px] h-[24px]" />
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <Skeleton className="w-[60px] h-[28px]" />
+        <Skeleton className="w-[64px] h-[24px]" />
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <Skeleton className="w-[60px] h-[28px]" />
+        <Skeleton className="w-[64px] h-[24px]" />
+      </div>
+    </div>
+  );
+}
 
 const fetchMoneySpend = async (range: string): Promise<string> => {
   const sheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
