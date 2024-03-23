@@ -21,3 +21,5 @@ export * from './checkbox';
 export * from './tabs';
 export * from './select';
 export * from './data-table';
+
+export * from './dialog';
