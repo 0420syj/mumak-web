@@ -7,10 +7,9 @@ import {
 } from '@repo/ui/dropdown-menu';
 import { Button } from '@repo/ui/button';
 import { getServerSession } from 'next-auth/next';
-import { Avatar, AvatarFallback, AvatarImage } from '@repo/ui/avatar';
-import { Skeleton } from '@repo/ui/skeleton';
 import { authOptions } from '@moomin-money/libs/auth';
 import { SignIn, SignOut } from './auth-components';
+import { UserAvatar } from './user-avatar';
 
 export default async function UserButton(): Promise<React.ReactElement> {
   const session = await getServerSession(authOptions);
@@ -21,12 +20,7 @@ export default async function UserButton(): Promise<React.ReactElement> {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button className="relative w-8 h-8 rounded-full" variant="ghost">
-            <Avatar className="w-8 h-8">
-              {session.user.image ? <AvatarImage alt={session.user.name ?? ''} src={session.user.image} /> : null}
-              <AvatarFallback asChild>
-                <Skeleton className="w-8 h-8 rounded-full" />
-              </AvatarFallback>
-            </Avatar>
+            <UserAvatar user={session.user} />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" forceMount>
