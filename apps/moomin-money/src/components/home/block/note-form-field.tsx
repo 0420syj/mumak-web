@@ -67,7 +67,7 @@ export function NoteFormField({ control }: { control: Control<z.infer<typeof for
               }}
             />
           </FormControl>
-          <ul>
+          <ul className="max-h-[300px] overflow-y-auto overflow-x-hidden">
             {autoComplete.map((item, index) => (
               // eslint-disable-next-line react/no-array-index-key -- safe
               <li key={index}>{item}</li>
