@@ -12,6 +12,9 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "test": {},
+    "test:watch": {
+      "cache": false
+    },
     "lint": {},
     "type-check": {},
     "dev": {

@@ -1,6 +1,25 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/tabs';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@repo/ui/skeleton';
 import { getUserName } from '@moomin-money/libs/auth';
-import DataTableContainer from './block/data-table/data-table-container';
+
+const DataTableContainer = dynamic(() => import('./block/data-table/data-table-container'), {
+  ssr: false,
+  loading: () => (
+    <div>
+      <div className="py-4">
+        <Skeleton className="rounded-md h-10" />
+      </div>
+      <div className="pb-2">
+        <Skeleton className="rounded-md h-10" />
+      </div>
+      <div className="pb-2">
+        <Skeleton className="rounded-md h-6" />
+      </div>
+      <Skeleton className="rounded-md h-[531.5px]" />
+    </div>
+  ),
+});
 
 async function MoneybookPage(): Promise<React.ReactElement> {
   const name = await getUserName('wanny');
