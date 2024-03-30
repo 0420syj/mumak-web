@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next';
 import { convertJSDateToExcelSerialDate } from '@repo/lib';
 import type { z } from 'zod';
 import { GoogleSheetsService } from '@moomin-money/services/google-sheets-service';

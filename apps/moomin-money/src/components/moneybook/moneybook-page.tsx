@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/tabs';
-import dynamic from 'next/dynamic';
 import { Skeleton } from '@repo/ui/skeleton';
 import { getUserName } from '@moomin-money/libs/auth';
 import { MoneySpendBoardSkeleton } from '@moomin-money/components/money-spend-board';
