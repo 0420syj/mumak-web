@@ -29,11 +29,18 @@ function combine(cho = 0, jung = 0, jong = 0): string {
   return String.fromCharCode(HANGUL_START_CHARCODE + cho * CHO_PERIOD + jung * JUNG_PERIOD + jong);
 }
 
+function escapeRegExpChars(text: string): string {
+  // This matches any character that has a special meaning in regex and escapes it.
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function makeRegexByCho(search = ''): RegExp {
-  const regex = CHO_HANGUL.reduce(
-    (acc, cho, index) => acc.replace(new RegExp(cho, 'g'), `[${combine(index, 0, 0)}-${combine(index + 1, 0, -1)}]`),
-    search
-  );
+  const escapedSearch = escapeRegExpChars(search);
+
+  const regex = CHO_HANGUL.reduce((acc, cho, index) => {
+    const choRegex = new RegExp(escapeRegExpChars(cho), 'g');
+    return acc.replace(choRegex, `[${combine(index, 0, 0)}-${combine(index + 1, 0, -1)}]`);
+  }, escapedSearch);
 
   return new RegExp(`(${regex})`, 'g');
 }
