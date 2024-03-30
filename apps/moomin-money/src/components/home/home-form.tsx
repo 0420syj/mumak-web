@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { ReloadIcon } from '@radix-ui/react-icons';
+import { convertLocalTimeZoneToUTCTimeZone } from '@repo/lib';
 import { postSheetValues } from '@moomin-money/services/apis/post-sheets';
 import { NameFormField } from './block/name-form-field';
 import { DateFormField } from './block/date-form-field';
@@ -22,6 +23,7 @@ export const formSchema = z.object({
     .date({
       required_error: '날짜를 입력해주세요',
     })
+    .transform(date => convertLocalTimeZoneToUTCTimeZone(date))
     .optional(),
   content: z.string().min(1, '내용을 입력해주세요').optional(),
   price: z

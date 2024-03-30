@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion -- safe */
 
-import { convertDateToSerial } from '@repo/lib';
+import { convertJSDateToExcelSerialDate } from '@repo/lib';
 import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
 import { isVercelEnvProduction } from '@moomin-money/libs/vercel';
 import { isSessionValid } from '@moomin-money/libs/auth';
@@ -34,7 +34,7 @@ function convertToDataTableData(response: (string | number)[][]): {
     //TODO: remove this filter after implementing the value filtering feature
     .filter(row => {
       const lastDayOfThisMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
-      return row.날짜 <= convertDateToSerial(lastDayOfThisMonth);
+      return row.날짜 <= convertJSDateToExcelSerialDate(lastDayOfThisMonth);
     });
 
   return {
