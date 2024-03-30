@@ -1,6 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/tabs';
+import dynamic from 'next/dynamic';
 import { getUserName } from '@moomin-money/libs/auth';
-import DataTableContainer from './block/data-table/data-table-container';
+
+const DataTableContainer = dynamic(() => import('./block/data-table/data-table-container'), {
+  ssr: false,
+});
 
 async function MoneybookPage(): Promise<React.ReactElement> {
   const name = await getUserName('wanny');

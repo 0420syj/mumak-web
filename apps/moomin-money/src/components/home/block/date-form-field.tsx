@@ -40,8 +40,8 @@ export function DateFormField({ control }: { control: Control<z.infer<typeof for
                   initialFocus
                   locale={ko}
                   mode="single"
-                  onSelect={event => {
-                    field.onChange(event);
+                  onSelect={date => {
+                    field.onChange(date);
                     setIsPopoverOpen(false);
                   }}
                   selected={field.value}

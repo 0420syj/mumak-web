@@ -3,7 +3,7 @@
 
 import type { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from '@repo/ui/data-table';
-import { convertToDate } from '@repo/lib/utils';
+import { convertExcelSerialDateToJSDate } from '@repo/lib/utils';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Button } from '@repo/ui/button';
 import {
@@ -30,7 +30,7 @@ export const columns: ColumnDef<Moneybook>[] = [
     accessorKey: '날짜',
     cell: ({ row }) => {
       const data = parseFloat(row.getValue('날짜'));
-      const formatted = convertToDate(data).toLocaleDateString('ko-KR');
+      const formatted = convertExcelSerialDateToJSDate(data).toLocaleDateString('ko-KR');
 
       return <div className="text-left text-nowrap">{formatted}</div>;
     },
