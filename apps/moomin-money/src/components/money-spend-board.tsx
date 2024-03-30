@@ -1,16 +1,39 @@
 import Link from 'next/link';
-import { getSheetValues } from '@moomin-money/services/apis/get-sheets';
+import { Skeleton } from '@repo/ui/skeleton';
 import { isSessionValid } from '@moomin-money/libs/auth';
+import { GoogleSheetsService } from '@moomin-money/services/google-sheets-service';
+
+export function MoneySpendBoardSkeleton(): React.ReactElement {
+  return (
+    <div className="flex flex-row justify-around">
+      <div className="flex flex-col items-center gap-1">
+        <Skeleton className="w-[60px] h-[28px]" />
+        <Skeleton className="w-[64px] h-[24px]" />
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <Skeleton className="w-[60px] h-[28px]" />
+        <Skeleton className="w-[64px] h-[24px]" />
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <Skeleton className="w-[60px] h-[28px]" />
+        <Skeleton className="w-[64px] h-[24px]" />
+      </div>
+    </div>
+  );
+}
 
 const fetchMoneySpend = async (range: string): Promise<string> => {
-  const sheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
+  const googleSheetsService = new GoogleSheetsService();
+  const sheetName = process.env.GOOGLE_MAIN_SHEET_NAME;
 
   if (!sheetName) {
-    throw new Error('NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME is not set');
+    throw new Error('GOOGLE_MAIN_SHEET_NAME is not set');
   }
 
   try {
-    return await getSheetValues({ sheetName, range }).then(values => `${values[0][0].toLocaleString()}원`);
+    return await googleSheetsService
+      .getSheetValues(`${sheetName}!${range}`)
+      .then(values => `${values[0][0].toLocaleString()}원`);
   } catch (error) {
     // eslint-disable-next-line no-console -- This is a server-side function
     console.error('Failed to fetch money spend', error);

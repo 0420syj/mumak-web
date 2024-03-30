@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { convertLocalTimeZoneToUTCTimeZone } from '@repo/lib';
+import { useRouter } from 'next/navigation';
 import { postSheetValues } from '@moomin-money/services/apis/post-sheets';
 import { NameFormField } from './block/name-form-field';
 import { DateFormField } from './block/date-form-field';
@@ -29,8 +30,10 @@ export const formSchema = z.object({
   price: z
     .string()
     .min(1, '가격을 입력해주세요')
-    .regex(/^\d+$/, '숫자만 입력해주세요')
-    .transform(v => v.replace(/^0+/, ''))
+    .refine(v => /^[0-9,-]*$/.test(v), {
+      message: '숫자만 입력해주세요',
+    })
+    .transform(v => v.replace(/[^0-9-]/g, ''))
     .optional(),
   category: z.string().min(1, '카테고리를 입력해주세요').optional(),
   payment: z.string().min(1, '결제수단을 입력해주세요').optional(),
@@ -43,6 +46,7 @@ interface HomeFormProps {
 
 export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,6 +93,8 @@ export function HomeForm({ defaultValues }: HomeFormProps): React.ReactElement {
           </ToastAction>
         ),
       });
+    } finally {
+      router.refresh();
     }
   }
 

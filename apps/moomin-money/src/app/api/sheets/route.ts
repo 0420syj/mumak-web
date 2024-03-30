@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next';
 import { convertJSDateToExcelSerialDate } from '@repo/lib';
 import type { z } from 'zod';
 import { GoogleSheetsService } from '@moomin-money/services/google-sheets-service';
-import { authOptions } from '@moomin-money/libs/auth';
+import { isSessionValid } from '@moomin-money/libs/auth';
 import type { formSchema } from '@moomin-money/components/home/home-form';
 import { isVercelEnvProduction } from '@moomin-money/libs/vercel';
 
@@ -16,9 +15,7 @@ interface RequestInterface extends Omit<z.infer<typeof formSchema>, 'date' | 'na
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
+  if (!(await isSessionValid())) {
     return NextResponse.json({ error: 'Login required' }, { status: 401 });
   }
 
@@ -27,10 +24,6 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     requestData.date = convertJSDateToExcelSerialDate(new Date(requestData.date));
     requestData.price = Number(requestData.price);
-
-    if (!process.env.GOOGLE_SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SPREADSHEET_ID is not set');
-    }
 
     if (!process.env.GOOGLE_WANNY_SHEET_NAME || !process.env.GOOGLE_MOOMIN_SHEET_NAME) {
       throw new Error('GOOGLE_WANNY_SHEET_NAME or GOOGLE_MOOMIN_SHEET_NAME is not set');
@@ -50,7 +43,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     delete requestData.name;
     const valueData = [Object.values(requestData)];
 
-    const response = await googleSheetsService.postSheetValues(process.env.GOOGLE_SPREADSHEET_ID, range, valueData);
+    const response = await googleSheetsService.postSheetValues(range, valueData);
 
     return NextResponse.json({ data: response });
   } catch (error: unknown) {

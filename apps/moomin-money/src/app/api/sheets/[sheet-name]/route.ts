@@ -1,6 +1,7 @@
 import { type NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { GoogleSheetsService } from '@moomin-money/services/google-sheets-service';
+import { isSessionValid } from '@moomin-money/libs/auth';
 
 const googleSheetsService = new GoogleSheetsService();
 
@@ -9,6 +10,10 @@ export async function GET(
   { params }: { params: { 'sheet-name': string } }
 ): Promise<NextResponse> {
   try {
+    if (!(await isSessionValid())) {
+      return NextResponse.json({ error: 'Login required' }, { status: 401 });
+    }
+
     const { 'sheet-name': sheetName } = params;
 
     if (!process.env.GOOGLE_SHEET_RANGE) {
@@ -17,10 +22,7 @@ export async function GET(
 
     const range = request.nextUrl.searchParams.get('range') || process.env.GOOGLE_SHEET_RANGE;
 
-    if (!process.env.GOOGLE_SPREADSHEET_ID) {
-      throw new Error('GOOGLE_SPREADSHEET_ID is not set');
-    }
-    const values = await googleSheetsService.getSheetValues(process.env.GOOGLE_SPREADSHEET_ID, `${sheetName}!${range}`);
+    const values = await googleSheetsService.getSheetValues(`${sheetName}!${range}`);
 
     return NextResponse.json({ values });
   } catch (error: unknown) {
