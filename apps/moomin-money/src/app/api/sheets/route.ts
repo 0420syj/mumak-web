@@ -25,6 +25,10 @@ export async function POST(request: Request): Promise<NextResponse> {
   try {
     const requestData = (await request.json()) as RequestInterface;
     requestData.date = convertDateToSerial(new Date(requestData.date));
+
+    // eslint-disable-next-line no-console -- temporary log
+    console.log('converted date', requestData.date);
+
     requestData.price = Number(requestData.price);
 
     if (!process.env.GOOGLE_SPREADSHEET_ID) {
