@@ -24,10 +24,10 @@ export function MoneySpendBoardSkeleton(): React.ReactElement {
 
 const fetchMoneySpend = async (range: string): Promise<string> => {
   const googleSheetsService = new GoogleSheetsService();
-  const sheetName = process.env.NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME;
+  const sheetName = process.env.GOOGLE_MAIN_SHEET_NAME;
 
   if (!sheetName) {
-    throw new Error('NEXT_PUBLIC_GOOGLE_MAIN_SHEET_NAME is not set');
+    throw new Error('GOOGLE_MAIN_SHEET_NAME is not set');
   }
 
   try {
