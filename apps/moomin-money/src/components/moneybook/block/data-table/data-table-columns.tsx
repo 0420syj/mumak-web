@@ -4,7 +4,7 @@
 import type { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from '@repo/ui/data-table';
 import { convertExcelSerialDateToJSDate } from '@repo/lib/utils';
-import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { ClipboardCopyIcon, DotsHorizontalIcon, FileTextIcon } from '@radix-ui/react-icons';
 import { Button } from '@repo/ui/button';
 import {
   DropdownMenu,
@@ -86,7 +86,11 @@ export const columns: ColumnDef<Moneybook>[] = [
     cell: ({ row }) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks -- safe to ignore
       const { toast } = useToast();
-      const rowData = row.original;
+      const rowData = {
+        ...row.original,
+        날짜: convertExcelSerialDateToJSDate(row.original.날짜).toLocaleDateString('ko-KR'),
+        금액: row.original.금액.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' }),
+      };
 
       return (
         <DropdownMenu>
@@ -107,17 +111,25 @@ export const columns: ColumnDef<Moneybook>[] = [
                       altText="복사"
                       onClick={() => navigator.clipboard.writeText(JSON.stringify(rowData, null, 2))}
                     >
+                      <ClipboardCopyIcon className="h-4 w-4 mr-2" />
                       복사
                     </ToastAction>
                   ),
                 });
               }}
             >
+              <FileTextIcon className="h-4 w-4 mr-2" />
               상세 보기
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rowData.내용)}>내용 복사</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rowData.비고)}>비고 복사</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rowData.내용)}>
+              <ClipboardCopyIcon className="h-4 w-4 mr-2" />
+              내용 복사
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rowData.비고)}>
+              <ClipboardCopyIcon className="h-4 w-4 mr-2" />
+              비고 복사
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
