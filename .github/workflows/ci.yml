@@ -1,4 +1,4 @@
-name: CI
+name: 👷 CI
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    name: Build and Test
+    name: 👷 Build and Test
     timeout-minutes: 15
     runs-on: ubuntu-latest
 
@@ -21,34 +21,34 @@ jobs:
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
     steps:
-      - name: Check out code
+      - name: ✅ Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Setup pnpm
+      - name: ⚙️ Setup pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 8
 
-      - name: Setup Node.js environment
+      - name: ⚙️ Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Install dependencies
+      - name: 📦️ Install dependencies
         run: pnpm install
 
-      - name: Install Vercel CLI
+      - name: 📦️ Install Vercel CLI
         run: pnpm install --global vercel@latest
 
-      - name: Pull Vercel Environment Information
+      - name: 🔐 Pull Vercel Environment Information
         run: |
           vercel env pull apps/moomin-money/.env.local --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Build
+      - name: 🏗️ Build
         run: pnpm build
 
-      - name: Test
+      - name: 🧪 Test
         run: pnpm test
