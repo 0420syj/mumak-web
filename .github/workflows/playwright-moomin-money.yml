@@ -5,9 +5,9 @@ env:
 
 on:
   push:
-    branches: [main, master]
+    branches: ['main', 'develop']
   pull_request:
-    branches: [main, master]
+    types: [opened, synchronize]
 
 jobs:
   test:
