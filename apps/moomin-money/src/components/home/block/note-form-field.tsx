@@ -83,6 +83,7 @@ export function NoteFormField({ control }: { control: Control<z.infer<typeof for
           </FormControl>
           <ul className="max-h-[100px] overflow-y-auto overflow-x-hidden rounded-md border border-foreground/20">
             {filteredAutoComplete.map(item => (
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- li is interactive
               <li
                 className="text-base p-2 cursor-pointer hover:bg-foreground/10"
                 key={`list-${item}`}
@@ -96,8 +97,6 @@ export function NoteFormField({ control }: { control: Control<z.infer<typeof for
                     handleSearch(item as string);
                   }
                 }}
-                // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- safe
-                role="button"
                 tabIndex={-1} // Added tabIndex of -1
               >
                 {item}

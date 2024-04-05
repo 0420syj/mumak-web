@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_KR as NotoSansKR } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { ThemeProvider } from '@moomin-money/components/theme-provider';
 import { Header } from '@moomin-money/components/header';
 import { ToastProvider } from '@moomin-money/components/toast-provider';
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
   description: 'Moneybook web app for breading moomin',
   applicationName: 'Moomin Money',
   openGraph: {
+    url: 'https://money.5231.kr',
     type: 'website',
     title: 'Moomin Money',
     description: 'Moneybook web app for breading moomin',
@@ -29,12 +31,13 @@ export const metadata: Metadata = {
     name: 'Wan Sim',
     url: 'https://wannysim.me',
   },
+  manifest: '/manifest.json',
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1.0,
-  maximumScale: 1.0,
+  themeColor: '#014381',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }): React.ReactElement {
@@ -53,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
         <Analytics />
         <SpeedInsights />
       </body>
+      <GoogleAnalytics gaId="G-8T5PWV12HY" />
     </html>
   );
 }
