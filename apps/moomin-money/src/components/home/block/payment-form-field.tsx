@@ -36,6 +36,7 @@ export function PaymentFormField({ control }: { control: Control<z.infer<typeof 
                 <FormItem className="flex items-center justify-center" key={option.id}>
                   <FormControl>
                     <RadioGroupItem
+                      aria-label="payment"
                       checked={field.value === option.value}
                       className="sr-only peer"
                       id={option.id}

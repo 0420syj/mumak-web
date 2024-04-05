@@ -11,7 +11,7 @@ export function MainNav(): React.ReactElement {
 
   return (
     <div className="mr-4 flex">
-      <Link className="mr-6 flex items-center space-x-2" href="/">
+      <Link aria-label="홈" className="mr-6 flex items-center space-x-2" href="/">
         <HomeIcon className="w-6 h-6" />
       </Link>
       <nav className="flex items-center gap-6 text-sm">
@@ -27,7 +27,7 @@ export function MainNav(): React.ReactElement {
         <Link
           className={cn(
             'transition-colors hover:text-foreground/80',
-            pathname === '/moneybook' ? 'text-foreground' : 'text-foreground/40'
+            pathname === '/moneybook' ? 'text-foreground' : 'text-foreground/60'
           )}
           href="/moneybook"
         >
