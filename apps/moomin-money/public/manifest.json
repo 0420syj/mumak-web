@@ -587,31 +587,63 @@
       "src":"screenshots/home-dark.png",
       "sizes":"686x1402",
       "form_factor":"narrow",
-      "label":"You can enter your moneybook data from the home screen."
+      "label":"You can enter your moneybook data from the home screen"
     },
     {
       "src":"screenshots/moneybook-dark.png",
       "sizes":"686x1402",
       "form_factor":"narrow",
-      "label":"You can view detailed breakdowns on the Consumption history screen."
+      "label":"You can view detailed breakdowns on the Consumption history screen"
     },
     {
       "src":"screenshots/moneybook-light.png",
       "sizes":"686x1402",
       "form_factor":"narrow",
-      "label": "You can filter to see the data you want."
+      "label": "You can filter to see the data you want"
+    },
+    {
+      "src":"screenshots/home-dark-wide.png",
+      "sizes":"2368x1540",
+      "form_factor":"wide",
+      "label":"You can enter your moneybook data from the home screen"
+    },
+    {
+      "src":"screenshots/moneybook-dark-wide.png",
+      "sizes":"2368x1540",
+      "form_factor":"wide",
+      "label":"You can view detailed breakdowns on the Consumption history screen"
+    },
+    {
+      "src":"screenshots/moneybook-light-wide.png",
+      "sizes":"2368x1540",
+      "form_factor":"wide",
+      "label": "You can filter to see the data you want"
     }
   ],
   "shortcuts": [
     {
       "name": "Home",
       "url": "/",
-      "description": "Enter your moneybook data."
+      "description": "Enter your moneybook data",
+      "icons": [
+        {
+          "src": "windows11/Square44x44Logo.targetsize-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Moneybook",
       "url": "/moneybook",
-      "description": "View your moneybook data."
+      "description": "View your moneybook data",
+      "icons": [
+        {
+          "src": "windows11/Square44x44Logo.targetsize-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     }
   ],  
   "lang": "ko",
