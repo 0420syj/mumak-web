@@ -1,4 +1,6 @@
 {
+  "extends": "@repo/typescript-config/react-library.json",
+
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -18,7 +20,13 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Paths */
+    "baseUrl": ".",
+    "paths": {
+      "@trip-helper/*": ["./src/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
