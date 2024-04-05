@@ -9,6 +9,10 @@
       "path": "apps/moomin-money"
     },
     {
+      "name": "✈️trip-helper",
+      "path": "apps/trip-helper"
+    },
+    {
       "name": "📕ui",
       "path": "packages/ui"
     },

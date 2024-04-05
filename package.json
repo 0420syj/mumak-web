@@ -4,6 +4,7 @@
     "build": "turbo build",
     "test": "turbo test",
     "test:watch": "turbo test:watch",
+    "test:e2e": "turbo test:e2e",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
@@ -15,7 +16,7 @@
     "eslint": "^8.56.0",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.10",
-    "turbo": "^1.13.0"
+    "turbo": "^1.13.2"
   },
   "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2",
   "engines": {

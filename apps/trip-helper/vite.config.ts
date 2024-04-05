@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@ui': path.resolve(__dirname, './src'),
+      '@trip-helper': path.resolve(__dirname, './src'),
     },
   },
   test: {
