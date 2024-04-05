@@ -27,6 +27,7 @@ export function NameFormField({ control }: { control: Control<z.infer<typeof for
                 <FormItem className="flex items-center justify-center" key={option.id}>
                   <FormControl>
                     <RadioGroupItem
+                      aria-label="name"
                       checked={field.value === option.id}
                       className="sr-only peer"
                       id={option.id}
