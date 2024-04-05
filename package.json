@@ -4,6 +4,7 @@
     "build": "turbo build",
     "test": "turbo test",
     "test:watch": "turbo test:watch",
+    "test:e2e": "turbo test:e2e",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "type-check": "turbo type-check",

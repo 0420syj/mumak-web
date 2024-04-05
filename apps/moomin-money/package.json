@@ -9,6 +9,7 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "test": "jest",
+    "test:e2e": "playwright test",
     "test:watch": "jest --watch"
   },
   "dependencies": {
