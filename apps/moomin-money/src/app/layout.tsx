@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   description: 'Moneybook web app for breading moomin',
   applicationName: 'Moomin Money',
   openGraph: {
+    url: 'https://money.5231.kr',
     type: 'website',
     title: 'Moomin Money',
     description: 'Moneybook web app for breading moomin',
