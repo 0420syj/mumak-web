@@ -3,6 +3,11 @@
   "description": "Moneybook web app for breading moomin",
   "dir": "auto",
   "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "browser"
+  ],  
   "name": "Moomin Money",
   "orientation": "any",
   "scope": "/",
