@@ -1,30 +1,27 @@
-name: 👷 CI
+name: 👷 Playwright CI (moomin-money)
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
-    branches: ['main', 'develop']
+    branches: [main, master]
   pull_request:
-    types: [opened, synchronize]
+    branches: [main, master]
 
 jobs:
-  build:
-    name: 👷 Build and Test
-    timeout-minutes: 15
+  test:
+    name: 🧪 Playwright Tests
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-
-    # Remote Caching
     env:
+      working-directory: apps/moomin-money
+      # Remote Caching
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
     steps:
       - name: ✅ Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
       - name: ⚙️ Setup pnpm
         uses: pnpm/action-setup@v3
@@ -47,8 +44,14 @@ jobs:
         run: |
           vercel env pull apps/moomin-money/.env.local --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: 🏗️ Build
-        run: pnpm build
+      - name: 📦️ Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+      - name: 🧪 Run Playwright tests
+        run: pnpm exec playwright test
 
-      - name: 🧪 Test
-        run: pnpm test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
