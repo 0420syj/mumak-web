@@ -29,12 +29,13 @@ export const metadata: Metadata = {
     name: 'Wan Sim',
     url: 'https://wannysim.me',
   },
+  manifest: '/manifest.json',
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1.0,
-  maximumScale: 1.0,
+  themeColor: '#014381',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }): React.ReactElement {

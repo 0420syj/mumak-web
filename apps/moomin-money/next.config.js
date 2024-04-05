@@ -1,11 +1,19 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@repo/ui'],
 };
 
-// Injected content via Sentry wizard below
+// PWA configuration
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+});
 
+module.exports = withPWA(nextConfig);
+
+// Injected content via Sentry wizard below
 const { withSentryConfig } = require('@sentry/nextjs');
 
 module.exports = withSentryConfig(
