@@ -1,18 +1,26 @@
 import * as React from 'react';
-import { Button } from '@repo/ui/button';
-import './App.css';
+import IntroPage from '@fur-guess/pages/IntroPage';
+import GamePage from '@fur-guess/pages/GamePage';
 
 function App() {
-  const [count, setCount] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState('intro');
+
+  const navigateToGame = () => {
+    setCurrentPage('game');
+  };
+
+  const navigateToIntro = () => {
+    setCurrentPage('intro');
+  };
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <Button onClick={() => setCount(count => count + 1)}>count is {count}</Button>
-      <p>
-        Edit <code>src/App.tsx</code> and save to test HMR
-      </p>
-    </>
+    <div>
+      {currentPage === 'intro' ? (
+        <IntroPage onNavigate={navigateToGame} />
+      ) : (
+        <GamePage onNavigateToIntro={navigateToIntro} />
+      )}
+    </div>
   );
 }
 
