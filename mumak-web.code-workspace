@@ -13,6 +13,10 @@
       "path": "apps/trip-helper"
     },
     {
+      "name": "🐾fur-guess",
+      "path": "apps/fur-guess"
+    },
+    {
       "name": "📕ui",
       "path": "packages/ui"
     },
