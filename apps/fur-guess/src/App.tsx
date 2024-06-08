@@ -26,7 +26,7 @@ function App() {
   };
 
   return (
-    <div>
+    <main className="flex min-h-[100dvh] w-full flex-col items-center justify-center bg-gradient-to-t from-[#8B5CF6] to-[#EC4899] px-4 md:px-6">
       {currentPage === 'intro' ? (
         <IntroPage onNavigate={navigateToGame} />
       ) : result ? (
@@ -34,7 +34,7 @@ function App() {
       ) : (
         <GamePage onNavigateToIntro={navigateToIntro} onGameEnd={handleGameEnd} />
       )}
-    </div>
+    </main>
   );
 }
 

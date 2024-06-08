@@ -10,7 +10,7 @@ describe('App', () => {
 
   it('should increase the count when the button is clicked', () => {
     render(<ResultPage result={{ correct: 0, total: 0, time: 0 }} onNavigateToIntro={() => {}} />);
-    const button = screen.getByRole('button', { name: '다시 시작' });
+    const button = screen.getByRole('button', { name: '메인으로 돌아가기 (R)' });
     expect(button).toBeInTheDocument();
   });
 });

@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Input } from '@repo/ui/input';
 import { Button } from '@repo/ui/button';
 import { Progress } from '@repo/ui/progress';
 import { Question, questions as originalQuestions } from '@fur-guess/data/questions';
+import FeedbackCard from '@fur-guess/components/feedback-card';
+import { ChevronRightIcon } from '@radix-ui/react-icons';
 
 interface GamePageProps {
-  onNavigateToIntro: () => void;
+  onNavigateToIntro?: () => void;
   onGameEnd: (correct: number, total: number, time: number) => void;
 }
 
@@ -17,12 +19,15 @@ function shuffleArray(array: Question[]) {
   return array;
 }
 
-export default function GamePage({ onNavigateToIntro, onGameEnd }: GamePageProps) {
+export default function GamePage({ onGameEnd }: GamePageProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [guess, setGuess] = useState('');
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [questions, setQuestions] = useState(() => shuffleArray([...originalQuestions]));
+  const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setCurrentQuestion(0);
@@ -30,59 +35,86 @@ export default function GamePage({ onNavigateToIntro, onGameEnd }: GamePageProps
     setCorrectGuesses(0);
     setStartTime(new Date());
     setQuestions(shuffleArray([...originalQuestions]));
+    inputRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [currentQuestion]);
 
   const handleGuess = () => {
     const normalizedGuess = guess.trim().toLowerCase();
+
+    if (normalizedGuess === '') {
+      return;
+    }
+
     const isCorrect = questions[currentQuestion].answers.some(
       (answer: string) => answer.toLowerCase() === normalizedGuess
     );
 
+    setFeedback(isCorrect ? 'correct' : 'incorrect');
+
     if (isCorrect) {
       setCorrectGuesses(correctGuesses + 1);
     }
+  };
 
+  const handleNextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setGuess('');
+      setFeedback(null);
     } else {
       const endTime = new Date();
       const timeTaken = (endTime.getTime() - (startTime?.getTime() || 0)) / 1000;
-      onGameEnd(isCorrect ? correctGuesses + 1 : correctGuesses, questions.length, timeTaken);
+      onGameEnd(correctGuesses, questions.length, timeTaken);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      if (feedback === null) {
+        handleGuess();
+      } else {
+        handleNextQuestion();
+      }
     }
   };
 
   return (
-    <main className="flex min-h-[100dvh] w-full flex-col items-center justify-center bg-gradient-to-br from-[#8B5CF6] to-[#EC4899] px-4 py-12 md:px-6 lg:py-24">
-      <div className="mx-auto max-w-md space-y-6 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">FurGuess</h1>
-        <p className="text-lg font-medium text-white/90">{currentQuestion + 1}번째 퍼슈트의 이름을 맞춰보세요.</p>
-        <p className="text-lg font-medium text-white/90">공백을 제외한 이름을 입력하세요.</p>
-        <div className="space-y-4">
-          <Progress className="w-full" value={((currentQuestion + 1) / questions.length) * 100} />
-          <img alt="Fur Suiter" className="mx-auto rounded-lg object-cover" src={questions[currentQuestion].image} />
-          <div className="grid w-full gap-2">
+    <div className="mx-auto max-w-md space-y-6 text-center" onKeyDown={handleKeyDown} tabIndex={0}>
+      <p className="text-lg font-medium text-white/90">#{currentQuestion + 1}</p>
+      <div className="space-y-4">
+        <Progress className="w-full" value={((currentQuestion + 1) / questions.length) * 100} />
+        <img
+          alt="Fur Suiter"
+          className="mx-auto rounded-lg object-cover aspect-square"
+          src={questions[currentQuestion].image}
+        />
+        {feedback === null ? (
+          <div className="flex space-x-4">
             <Input
-              className="flex-1 bg-white text-[#8B5CF6] hover:bg-white/90 text-center"
-              placeholder="입력"
+              ref={inputRef}
+              className="text-base flex-1 bg-white text-[#8B5CF6] hover:bg-white/90 text-center"
+              placeholder="공백을 제외한 이름을 입력하세요"
               type="text"
               value={guess}
               onChange={e => setGuess(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleGuess()}
             />
-            <Button className="bg-white text-[#8B5CF6] hover:bg-white/90" size="lg" onClick={handleGuess}>
-              제출
+            <Button className="bg-white text-[#8B5CF6] hover:bg-white/90" onClick={handleGuess}>
+              <ChevronRightIcon />
             </Button>
           </div>
-          <p className="text-lg font-medium text-white/90">
-            정답률:{' '}
-            <span className="font-bold text-white">{((correctGuesses / questions.length) * 100).toFixed(2)}%</span>
-          </p>
-          <Button className="bg-white text-[#8B5CF6] hover:bg-white/90" size="lg" onClick={onNavigateToIntro}>
-            다시 시작
-          </Button>
-        </div>
+        ) : (
+          <FeedbackCard
+            currentQuestion={currentQuestion}
+            feedback={feedback}
+            questions={questions}
+            handleNextQuestion={handleNextQuestion}
+          />
+        )}
       </div>
-    </main>
+    </div>
   );
 }
