@@ -24,7 +24,7 @@ export default function GamePage({ onGameEnd }: GamePageProps) {
   const [guess, setGuess] = useState('');
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [startTime, setStartTime] = useState<Date | null>(null);
-  const [questions, setQuestions] = useState(() => shuffleArray([...originalQuestions]));
+  const [questions, setQuestions] = useState<Question[]>(shuffleArray([...originalQuestions]));
   const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,7 +34,6 @@ export default function GamePage({ onGameEnd }: GamePageProps) {
     setGuess('');
     setCorrectGuesses(0);
     setStartTime(new Date());
-    setQuestions(shuffleArray([...originalQuestions]));
     inputRef.current?.focus();
   }, []);
 
@@ -82,6 +81,7 @@ export default function GamePage({ onGameEnd }: GamePageProps) {
     }
   };
 
+  if (questions.length === 0) return null;
   return (
     <div className="mx-auto max-w-md space-y-6 text-center" onKeyDown={handleKeyDown} tabIndex={0}>
       <p className="text-lg font-medium text-white/90">#{currentQuestion + 1}</p>
