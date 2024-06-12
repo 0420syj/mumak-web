@@ -12,6 +12,20 @@ export default defineConfig({
       '@ui': path.resolve(__dirname, './src'),
     },
   },
+  // temporary workaround for 'Can't resolve original location of error.'
+  // caused by using 'use client' directive in the source code
+  build: {
+    sourcemap: true,
+
+    rollupOptions: {
+      onLog(level, log, handler) {
+        if (log.cause && log.cause.message === `Can't resolve original location of error.`) {
+          return;
+        }
+        handler(level, log);
+      },
+    },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
