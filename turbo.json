@@ -1,21 +1,29 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
-  "pipeline": {
+  "ui": "stream",
+  "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "test", "lint"],
       "outputs": ["dist/**"]
     },
     "moomin-money#build": {
+      "inputs": [".env.*local"],
       "env": ["*"],
-      "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "test": {},
+    "test": {
+      "dependsOn": ["^test", "lint"]
+    },
     "test:watch": {
       "cache": false
     },
-    "test:e2e": {},
+    "test:e2e": {
+      "dependsOn": ["^test:e2e", "lint"]
+    },
+    "moomin-money#test:e2e": {
+      "inputs": [".env.*local"],
+      "env": ["*"]
+    },
     "lint": {},
     "type-check": {},
     "dev": {

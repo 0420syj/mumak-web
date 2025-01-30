@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { Input } from '@repo/ui/input';
 import { Button } from '@repo/ui/button';
@@ -24,7 +25,9 @@ export default function GamePage({ onGameEnd }: GamePageProps) {
   const [guess, setGuess] = useState('');
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [startTime, setStartTime] = useState<Date | null>(null);
-  const [questions, setQuestions] = useState(() => shuffleArray([...originalQuestions]));
+  const [elapsedTime, setElapsedTime] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [questions, setQuestions] = useState<Question[]>(shuffleArray([...originalQuestions]));
   const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,8 +37,13 @@ export default function GamePage({ onGameEnd }: GamePageProps) {
     setGuess('');
     setCorrectGuesses(0);
     setStartTime(new Date());
-    setQuestions(shuffleArray([...originalQuestions]));
     inputRef.current?.focus();
+
+    const interval = setInterval(() => {
+      setElapsedTime(prevElapsedTime => prevElapsedTime + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -82,8 +90,10 @@ export default function GamePage({ onGameEnd }: GamePageProps) {
     }
   };
 
+  if (questions.length === 0) return null;
   return (
     <div className="mx-auto max-w-md space-y-6 text-center" onKeyDown={handleKeyDown} tabIndex={0}>
+      <p className="text-lg font-medium text-white/90">소요 시간: {elapsedTime}초</p>
       <p className="text-lg font-medium text-white/90">#{currentQuestion + 1}</p>
       <div className="space-y-4">
         <Progress className="w-full" value={((currentQuestion + 1) / questions.length) * 100} />
